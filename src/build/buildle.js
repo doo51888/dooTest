@@ -85945,7 +85945,7 @@ App={
         App.accounts=  await ethereum.request({ method: 'eth_requestAccounts' });
         let chainIds=  await ethereum.request({ method: 'eth_chainId'});
      $("#chain").text(chainIds);
-     $("#mon_main").text(App.accounts[0]+"USDT");
+     $("#mon_main").text(addr_Trans(App.accounts[0]));
 
        ethereum.on('chainChanged',(chainID)=>{
        App.chainIdd=chainID;
@@ -86003,11 +86003,27 @@ App={
 //chain_select 
  initBingEvent: function (){
 
-      $("ceshi09").on('click',  function () {
-         
-         alert("dianji");
+
+      //transin
+       $("#transin").on('click',  function () {
+         // let mn=Number($('#sel4').val().split(":")[1]);
+         let mn= $('#sel4 option:selected').val()+"000000000000000000";
+          App.instance.methods.transferInFromFML(mn).send({from:App.accounts[0]})
+          .on('receipt',function(receipt){
+               get_mon();
+           get_approve_edu();
+          })
+      });
+
+      $("#transin").on('click',  function () {
+         App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
+           $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),5) +"USDT");
+          });
+
+
+    
           // App.chainIdd=chainID;
-          $("#mon_main").text(App.accounts[0]+"USDT");
+         
          // let mn= $('#sel4 option:selected').val()+"000000000000000000";
          // alert(mn);
          //  App.fml_instance.methods.approve(App.contract_Addr,mn).send({from:App.accounts[0]})
@@ -86016,11 +86032,28 @@ App={
          //  })
       
       });
+      $("#fmlApprove").on('click',  function () {
+         let mn= $('#sel4 option:selected').val();
+         alert(mn+"USDT");
+          App.fml_instance.methods.approve(App.contract_Addr,mn+"000000000000000000").send({from:App.accounts[0]})
+          .on('receipt',function(receipt){
+        
+           get_approve_edu();
+          
+          })
+       });
+         
+
+
+
        $(".dropdown-item").on('click', function () {
-       // let mn=$(this).find("img").attr("src");
-       //   $("#img01").attr("src",mn);
-       //   $("#dropdownMenuButton1").text($(this).text());
-         alert("dianji");
+       let mn=$(this).find("img").attr("src");
+         $("#img01").attr("src",mn);
+         $("#dropdownMenuButton1").text($(this).text());
+         //addr_Trans
+          $("#mon_main").text(addr_Trans(App.accounts[0]));
+           get_mon();
+           get_approve_edu();
     });
 
  }
@@ -86033,6 +86066,27 @@ App={
  * 
  *  公共函数
  **/ 
+// 获取当前余额
+function get_mon () {
+ App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
+           $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),5) +"USDT");
+          }); 
+}
+
+//获取授权额度
+function get_approve_edu() {
+   App.fml_instance.methods.allowance(App.accounts[0],App.contract_Addr).call(function (err,res) {
+
+             $("#approve_edu").text( Str_inof(web3.utils.fromWei(res),5)+"USDT");
+            })
+}
+
+
+ function Str_inof(x,y) {
+  return x.substring(0,x.indexOf(".") + y)
+ }
+
+
  function UpdateOutLog(x){
  for (let i = 0; i < x.length; i++){
 if (!inArry(App.logArrOut,x[i].returnValues._time)){

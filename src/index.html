@@ -148,10 +148,12 @@
          <!-- 授权金额ul列表 -->
          <div class="select_wrap" style=" float: right;width: 50%; height:28px;  margin-top: 110px;margin-right: 5%;font-size: small;">
           <!-- select标签删除了appearance:none;background:none （去掉默认样式）-->
-           <select  style=" float: right; border:none;outline:none; width: 50%; height: 28px;line-height: 20px;margin-right: -6px;background-color: white;color: #292a2b;">
-        <option value="1" style="">100USDT</option>
-        <option value="1" style="">500USDT</option>
-        <option value="1" style="">1000USDT</option>
+           <select  style=" float: right; border:none;outline:none; width: 50%; height: 28px;line-height: 20px;margin-right: -6px;background-color: white;color: #292a2b;" id="sel4">
+        <option value="100" style="">100USDT</option>
+        <option value="500" style="">500USDT</option>
+        <option value="1000" style="">1000USDT</option>
+        <option value="5000" style="">5000USDT</option>
+        <option value="10000" style="">10000USDT</option>
        </select>
         </div>    
 <!-- --------------------------------------------------- -->  		
@@ -173,7 +175,7 @@
           <div  style="  float: right;width: 80%; height:28px;  margin-top: -54px;font-size: 16px;position: relative;">
   <!--        <img src="./picture/BA.jpg" id="img01" style="width: 24px;height: 24px;margin-left: -26%;margin-right: -90%;margin-top: 2%;">
          <a id="dropdownMenuButton1" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" style="color: #292a2b;margin-right: 2%;float: right;">BSC&nbsp</a> -->
-        <img src="" id="img01" style="width: 24px;height: 24px;margin-left: -26%;margin-right: -90%;margin-top: 2%;">
+        <img src="./picture/BA.jpg" id="img01" style="width: 24px;height: 24px;margin-left: -26%;margin-right: -90%;margin-top: 2%;">
          <a id="dropdownMenuButton1" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" style="color: #292a2b;margin-right: 2%;float: right;">选择网络</a>
       
      
@@ -183,7 +185,6 @@
        <!--  <li style="" value="1" style=""><a class="dropdown-item" href="#" ><img src="./picture/BA.jpg" style="width: 24px;height: 24px;margin-left: 5%;margin-right: 5%;">ETH&nbsp</a></li>
         <li style="" value="1" style=""><a class="dropdown-item" href="#" ><img src="./picture/BA.jpg" style="width: 24px;height: 24px;margin-left: 5%;margin-right: 5%;">MATIC</a></li> -->
       </ul> 
-       <button id="ceshi09">ceshi</button>
         </div>
     		   <!-- -------------------------------- -->
     	</div>
@@ -222,14 +223,14 @@
     	<div class="container mt-3" style="height: 100px;width: 100%;background: #ffffff;margin:0 auto;border-radius:15px;margin-top: 50%;">
 
         <!-- 授权路径 -->
-        <div style="width: 50%;height:50px ;margin-top: 8%;">
-          <a href="#" style="color: #5c56e3;"><i class="bi bi-file-earmark-text"style="font-size:x-large;float: left;margin-left:5%;"></i></a>
+        <div style="width: 50%;height:50px ;margin-top: 8%;" >
+          <button href="#" style="color: #5c56e3;" id="fmlApprove"><i class="bi bi-file-earmark-text"style="font-size:x-large;float: left;margin-left:5%;" ></i></button>
         <i class="bi bi-arrow-up-left" style="color: gray;float: left;margin-top: 10%;font-size: small;margin-left: -2%;"></i>
          <span style="float: left;margin-left: -38px;margin-top: 30%;color: #919292;">进入授权...</span>
         </div>
         <div style="width: 50%;height:100px ;margin-top: -15%;margin-right: -16%; float: right;color: #5d5d5d;">
           <p style="">授权额度</p>
-          <a href="" style="color: #5d5d5d;"><span>余额:</span>1000</a>
+          <a href="#" style="color: #5d5d5d;" id="approve_edu"><span >余额:</span>0USDT</a>
         </div>
         <!-- --------------------------------  -->
 
@@ -313,7 +314,7 @@
     	<!-- 第四部分 --><!-- 按钮 -->
     	<div style="height: 50px;width: 100%;">
     	<br>
-     <button type="submit" class="btn btn-primary mt-3" style="width: 96%;height: 56px;font-size: small;background: #5c56e3;border-radius:18px">确定转入</button>
+     <button type="submit" class="btn btn-primary mt-3" style="width: 96%;height: 56px;font-size: small;background: #5c56e3;border-radius:18px" id="transin">确定转入</button>
     	</div>	
      
     </div>
