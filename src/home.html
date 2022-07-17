@@ -4,11 +4,25 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+<!--     <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script> -->
 	<title>doo|home</title>
-	<link rel="stylesheet" href="">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+<!-- 	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css"> -->
+
+		<link rel="stylesheet" href="./css/index.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+	   <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+	   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>  
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+	<script type="text/javascript" src="./build/homele.js"></script>
 </head>
 <body style="margin: 0;padding: 0; width: 100%;height: 920px;">
 
@@ -41,13 +55,13 @@
 	<form action="">
 	  <div class="mb-3 mt-3">
 		<label for="names" class="form-label">doo昵称:</label>
-		<input type="names"  id="names" placeholder="请输入昵称" name="names" required style="background:none;outline:none;border:none;background-color: #f2f6fe;height: 30px;padding-left: 6px;width: 70%;">
+		<input type="names"  id="home_names" placeholder="请输入昵称" name="names" required style="background:none;outline:none;border:none;background-color: #f2f6fe;height: 30px;padding-left: 6px;width: 70%;">
 		<i class="bi bi-pencil-square" style="color: #919292;"></i>
 	  </div>
 
 <div class="mb-3 mt-3">
 		<label for="levels" class="form-label">doo星级:</label>
-		<input type="levels"  id="levels" placeholder="*****" name="levels" readonly style="background:none;outline:none;border:none;background-color: #f6f8fc;height: 30px;padding-left: 6px;width: 70%;">
+		<input type="levels"  id="home_levels" placeholder="*****" name="levels" readonly style="background:none;outline:none;border:none;background-color: #f6f8fc;height: 30px;padding-left: 6px;width: 70%;">
 	  </div>
 
 	  <div class="mb-3">
@@ -58,13 +72,13 @@
 	  </div>
 	  <div class="mb-3">
 		<label for="dooaddress" class="form-label">doo地址:</label>
-		<input type="dooaddress"  id="dooaddress" placeholder="请输入doo仓地址" name="fireds" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;">
+		<input type="dooaddress"  id="dooaddress" placeholder="请输入doo仓地址" name="dooaddress" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;">
 		<i class="bi bi-pencil-square" style="color: #919292;"></i>
 		<p style="color: red;font-size: x-small;">注：默认钱包地址，可修改！！！</p>
 	  </div>
       <div class="mb-3">
 		<label for="moneyaddress" class="form-label">钱包地址:</label>
-		<input type="moneyaddress"  id="moneyaddress" placeholder="sjidklllwrq" name="moneyaddress"  readonly   style="background:none;outline:none;border:none;background-color:#f6f8fc ;height: 30px;padding-left: 6px;width: 70%;color:red;">
+		<input type="moneyaddress"  id="moneyaddress" placeholder="sjidklllwrq" name="moneyaddress"  readonly   style="background:none;outline:none;border:none;background-color:#f6f8fc ;height: 30px;padding-left: 6px;width: 70%;">
 		<i class="bi bi-back" style="color: #919292;"></i>
 	  </div>
 
@@ -90,10 +104,9 @@
   <h5 style="vertical-align:middle;"><i class="bi bi-file-earmark-pdf-fill" style="color: #5c56e3;font-size: x-large;vertical-align:middle;padding-right: 4px;"></i>账目信息</h5>
 
 <div style="line-height:40px;">
-基本仓：<label>0USDT</label><br>
-基本仓：<label>0USDT</label><br>
-基本仓：<label>0USDT</label><br>
-
+基本仓：<label id="home_base_mon">0USDT</label><br>
+基本仓：<label id="home_porfit_mon">0USDT</label><br>
+基本仓：<label id="home_mem_mon">0USDT</label><br>
 </div>
 
 </div><!-- -----------------第二部分完结------------------ -->

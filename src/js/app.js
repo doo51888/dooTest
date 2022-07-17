@@ -14,6 +14,8 @@ App={
   originalBlock:20964943,
   chainIdd:"0x61",
   infor:{},
+  isRunIn:false,
+  isRunOut:false,
   ininWebs:async function (){
 
  if (typeof window.ethereum !== 'undefined'){
@@ -73,7 +75,9 @@ App={
        App.fml_instance =  new web3.eth.Contract(data.abi,App.contract_usdtd,{from:App.accounts[0]});
       });
   }
+    
 
+     
     return App.initBingEvent(); 
    
   }
@@ -83,35 +87,127 @@ App={
 //chain_select 
  initBingEvent: function (){
 
-//transout
-     
+  //选择仓改变时 timeStampToTime(res[5])
+       $("#sel8").change(function () {
+    let localTime=  Date.parse(new Date())/1000;
+        let type=  $('#sel8 option:selected').val();
+        if (type==4){
+         $("#infor_notic").text("");
+        }else if(type==5) {
+ if (localTime>App.infor.limiteTime) {
+    $("#infor_notic").text("当前可转出，"+"基本仓最大可转出："+App.infor.base_mon+"USDT");
+ }else {
+     $("#infor_notic").text("当前处于锁仓期，"+"释放时间："+ timeStampToTime(App.infor.limiteTime)+","+"共计USDT数量："+App.infor.base_mon);
+ }
+           
+        }else if (type==6) {
+          if (App.infor.porfit_mon>=10) {
+
+        $("#infor_notic").text("利润仓可转出："+App.infor.porfit_mon);
+          }else {
+             $("#infor_notic").text("利润仓不可转出，"+"原因是：当前利润仓USDT数量"+App.infor.porfit_mon+"<10");
+          }
+           
+        } else if(type==7) {
+           if (App.infor.mem_mon>=5) {
+
+        $("#infor_notic").text("推荐仓可转出："+App.infor.mem_mon);
+          }else {
+             $("#infor_notic").text("推荐仓不可转出，"+"原因是：当前利润仓USDT数量"+App.infor.mem_mon+"<5");
+          }
+          
+        }
+       
+         App.instance.methods.balanceOfFromFML(_get).call(function (err,res) {
+           $('#balance').text(web3.utils.fromWei(res,'ether'));
+          });
+         App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
+          $("#usdt_cu").text(web3.utils.fromWei(res,'ether'));
+
+          });
+         //approve_edu 剩余授权额度
+            App.fml_instance.methods.allowance(_get,App.contract_Addr).call(function (err,res) {
+
+             $("#approve_edu").text( web3.utils.fromWei(res));
+            })
+
+          
+     });
+
+//transout 日志 刷新按钮 infor_notic
+     // 转出事件
      $("#monsout").on('click',  function () {
-            alert(123);
-            console.log(1234);
-        
-         let mn= $('value_trainout').val()+"000000000000000000";
+          let mn= document.getElementById("value_trainout").value+"000000000000000000";
          let type=  $('#sel8 option:selected').val();
-         conosle.log(mn);
-         conosle.log(type);
-         alert(type);
-         alert(mn);
-          App.instance.methods.transferoutFromFML(mn,type).send({from:App.accounts[0]})
+         let localTime=  Date.parse(new Date())/1000;
+         if (type==5) {
+         if (App.infor.base_mon>0) {
+            if (localTime>App.infor.limiteTime) {
+    App.instance.methods.transferoutFromFML(mn,type).send({from:App.accounts[0]})
           .on('receipt',function(receipt){
-            updateSelInfor();
+          firstGetInfor();
+          UpdateLog();
+            }) 
+
+         }else {
+              alert("基本仓处于锁仓期,不能转出！");
+            }
+
+        }else {
+           alert("基本仓USDT数量为0,不能转出！")
+         }
+      };
+         if (type==6) {
+            if (App.infor.porfit_mon<=10) {
+               alert("利润仓USDT数量大于10后可转出！")
+            }else {
+              App.instance.methods.transferoutFromFML(mn,type).send({from:App.accounts[0]})
+          .on('receipt',function(receipt){
+          firstGetInfor();
+          UpdateLog();
           })
+          }
+          
+      
+        };
+         if (type==7) {
+          if (App.infor.mem_mon<=5 ) {
+            alert("推荐仓USDT数量大于5后可转出！")
+          }else {
+              App.instance.methods.transferoutFromFML(mn,type).send({from:App.accounts[0]})
+          .on('receipt',function(receipt){
+          firstGetInfor();
+          UpdateLog();
+          })
+          }
+          
+
+        }
+
+         // let mn= $("value_trainout").val();
+       
+        
       });
-      //transin
+      //transin 转入事件
        $("#transin").on('click',  function () {
-         // let mn=Number($('#sel4').val().split(":")[1]);
-         let mn= $('#sel4 option:selected').val()+"000000000000000000";
+        if (!App.isRunIn) {
+  
+    
+           let mn= $('#sel4 option:selected').val()+"000000000000000000";
           App.instance.methods.transferInFromFML(mn).send({from:App.accounts[0]})
           .on('receipt',function(receipt){
                get_mon();
            get_approve_edu();
            updateSelInfor();
+           UpdateLog();
            //更新基本仓
-
+       
           })
+      
+        }
+       
+         // let mn=Number($('#sel4').val().split(":")[1]);
+        
       });
        //添加一个刷新按钮
         $('#refresh').on('click', function () {
@@ -160,8 +256,21 @@ App={
            get_approve_edu();
     });
 
-         $("#getlog_in").on('click', async function  () {
-        
+       
+
+
+ }
+
+
+
+}
+
+/**
+ * 
+ *  公共函数
+ **/ 
+// 获取当前余额
+  async function  UpdateLog(){
       let  tb= await web3.eth.getBlockNumber();
       let mmm =tb-App.originalBlock;
       if (mmm<4000) {
@@ -245,20 +354,10 @@ App={
         }
 
       }
-      }) ;
+    
+  }
 
 
- }
-
-
-
-}
-
-/**
- * 
- *  公共函数
- **/ 
-// 获取当前余额
 function get_mon () {
  App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
            $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),5) +"USDT");
@@ -464,7 +563,7 @@ function timeStampToTime (timestamp) {
            App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
           App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
           App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
-            
+            App.infor.limiteTime=res[5];
      });
 
  }
@@ -475,10 +574,14 @@ function timeStampToTime (timestamp) {
              App.infor.mem_addr=res[4];
               App.infor.name=res[1];
                App.infor.classs=res[11];
+               App.infor.limiteTime=res[5];
+               App.infor.deep_level=res[15];
+               App.infor._number=res[16];
            App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
           App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
           App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
           updateSelInfor();
+          UpdateLog();
      });
  }
 
