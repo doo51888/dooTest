@@ -85926,7 +85926,7 @@ Web3 = require('web3');
 fs= require('fs');
 App={
 
- logArrIn:[],
+  logArrIn:[],
   logArrOut:[],
   logCustoms:[],
   web3Provider: null,
@@ -85937,6 +85937,7 @@ App={
   contract_usdtd:'0xB8AfDC29EC2A48e253023384F2ee22874875448A',
   originalBlock:20964943,
   chainIdd:"0x61",
+  infor:{},
   ininWebs:async function (){
 
  if (typeof window.ethereum !== 'undefined'){
@@ -85946,7 +85947,7 @@ App={
         let chainIds=  await ethereum.request({ method: 'eth_chainId'});
      $("#chain").text(chainIds);
      $("#mon_main").text(addr_Trans(App.accounts[0]));
-
+     
        ethereum.on('chainChanged',(chainID)=>{
        App.chainIdd=chainID;
       $("#chain").text(chainID);
@@ -85986,14 +85987,17 @@ App={
    web3.setProvider(App.web3Provider); 
      
 
-      $.getJSON('./artifacts/test.json', function(data){
+      $.getJSON('./artifacts/test.json',  function(data){
        App.instance = new web3.eth.Contract(data.abi,App.contract_Addr,{from:App.accounts[0]});
+      firstGetInfor();
+      get_mon();
+      get_approve_edu();
       });
          $.getJSON('./artifacts/fml.json',  function(data){
        App.fml_instance =  new web3.eth.Contract(data.abi,App.contract_usdtd,{from:App.accounts[0]});
       });
   }
-    
+
     return App.initBingEvent(); 
    
   }
@@ -86003,7 +86007,23 @@ App={
 //chain_select 
  initBingEvent: function (){
 
-
+//transout
+     
+     $("#monsout").on('click',  function () {
+            alert(123);
+            console.log(1234);
+        
+         let mn= $('value_trainout').val()+"000000000000000000";
+         let type=  $('#sel8 option:selected').val();
+         conosle.log(mn);
+         conosle.log(type);
+         alert(type);
+         alert(mn);
+          App.instance.methods.transferoutFromFML(mn,type).send({from:App.accounts[0]})
+          .on('receipt',function(receipt){
+            updateSelInfor();
+          })
+      });
       //transin
        $("#transin").on('click',  function () {
          // let mn=Number($('#sel4').val().split(":")[1]);
@@ -86012,9 +86032,17 @@ App={
           .on('receipt',function(receipt){
                get_mon();
            get_approve_edu();
+           updateSelInfor();
+           //更新基本仓
+
           })
       });
-
+       //添加一个刷新按钮
+        $('#refresh').on('click', function () {
+       updateSelInfor();
+       getNotic();
+      
+      });
       $("#transin").on('click',  function () {
          App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
            $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),5) +"USDT");
@@ -86055,6 +86083,94 @@ App={
            get_mon();
            get_approve_edu();
     });
+
+         $("#getlog_in").on('click', async function  () {
+        
+      let  tb= await web3.eth.getBlockNumber();
+      let mmm =tb-App.originalBlock;
+      if (mmm<4000) {
+      App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock, toBlock: 'latest'},function (error,result) {
+ return result;
+  })
+.then(x=>{
+   UpdateInLog(x);
+  });
+      }else {
+        let _mmm=Math.floor(mmm/4000);
+        for (let i = 0; i <=_mmm; i++) {
+          if (i==0) {
+       App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock, toBlock:App.originalBlock+4000},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+          }
+          else {
+            if (App.originalBlock+(i+1)*4000>=tb) {
+                   App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock+4000*i, toBlock: 'latest'},function (error,result) {
+  
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+            }
+            else {
+                   App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock+i*4000, toBlock: App.originalBlock+(i+1)*4000},function (error,result) {
+  
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+            }
+
+          }
+
+        }
+
+      }
+
+
+//-------------------
+  if (mmm<4000) {
+      App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock, toBlock: 'latest'},function (error,result) {
+ return result;
+  })
+.then(x=>{
+   UpdateOutLog(x);
+  });
+      }else {
+       let _mmm=Math.floor(mmm/4000);
+        for (let i = 0; i <=_mmm; i++) {
+          if (i==0) {
+       App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock, toBlock: App.originalBlock+4000},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateOutLog(x);
+  });
+          }
+          else {
+            if (App.originalBlock+(i+1)*4000>=tb) {
+                   App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock+4000*i, toBlock: 'latest'},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateOutLog(x);
+  });
+            }
+            else {
+                   App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock+i*4000, toBlock: App.originalBlock+(i+1)*4000},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateOutLog(x);
+  });
+            }
+
+          }
+
+        }
+
+      }
+      }) ;
+
 
  }
 
@@ -86262,21 +86378,83 @@ function timeStampToTime (timestamp) {
   }
 
 
-
-
-  function updateSelInfor() {
-           App.instance.methods.getSelfInfor().call(function (err,res) {
-            console.log(res);
-            $('#base_addr').text(addr_Trans(res[0]));
-            $('#out_addr').val(addr_Trans(res[3]));
-            $('#mem_addr').val(addr_Trans(res[4]));
-            $('#name').val(res[1]);
-            $('#classs').text(res[11]);
-            $('#base_mon').text(web3.utils.fromWei(res[6],'ether'));
-            $('#porfit_mon').text(web3.utils.fromWei(res[7],'ether'));
-            $('#mem_mon').text(web3.utils.fromWei(res[8],'ether'));
+ function getInfor(){
+  App.instance.methods.getSelfInfor().call(function (err,res) {
+           App.infor.base_addr=res[0];
+            App.infor.out_addr=res[3];
+             App.infor.mem_addr=res[4];
+              App.infor.name=res[1];
+               App.infor.classs=res[11];
+           App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
+          App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
+          App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
             
      });
+
+ }
+ function firstGetInfor() {
+    App.instance.methods.getSelfInfor().call(function (err,res) {
+           App.infor.base_addr=res[0];
+            App.infor.out_addr=res[3];
+             App.infor.mem_addr=res[4];
+              App.infor.name=res[1];
+               App.infor.classs=res[11];
+           App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
+          App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
+          App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
+          updateSelInfor();
+     });
+ }
+
+  function updateSelInfor() {
+          if (typeof App.infor.out_addr) {
+        if ( App.infor.out_addr!="ox0000000000000000000000000000000000000000") {
+             $('#doo_account1').text(addr_Trans(App.infor.out_addr));
+             $('#doo_account2').text(addr_Trans(App.infor.out_addr));
+          if (typeof App.infor.base_mon) {
+
+            $('#base_mon').text(Str_inof(App.infor.base_mon,5)+"USDT");
+           }
+            if (typeof App.infor.porfit_mon) {
+
+            $('#porfit_mon').text(Str_inof(App.infor.porfit_mon,5)+"USDT");
+           }
+            if (typeof App.infor.mem_mon) {
+            $('#mem_mon').text(Str_inof(App.infor.mem_mon,5)+"USDT");
+            
+           }
+                  }else {
+               $('#doo_account1').text("注：请先创建doo账户！");
+               $('#doo_account1').css('color','red')
+                 $('#doo_account2').text("注：请先创建doo账户！");
+               $('#doo_account2').css('color','red')
+           }
+
+           }else{
+                 $('#doo_account1').text("注：请先创建doo账户！");
+               $('#doo_account1').css('color','red')
+                 $('#doo_account2').text("注：请先创建doo账户！");
+               $('#doo_account2').css('color','red')
+           }
+
+            
+          
+          //  App.infor.base_addr=res[0];
+          //   App.infor.out_addr=res[3];
+          //    App.infor.mem_addr=res[4];
+          //     App.infor.name=res[1];
+          //      App.infor.classs=res[11];
+          //  App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
+          // App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
+          // App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
+            // $('#base_addr').text(addr_Trans(res[0]));
+            // $('#out_addr').val(addr_Trans(res[3]));
+            // $('#mem_addr').val(addr_Trans(res[4]));
+            // $('#name').val(res[1]);
+            // $('#classs').text(res[11]);
+            // $('#base_mon').text(web3.utils.fromWei(res[6],'ether'));
+            // $('#porfit_mon').text(web3.utils.fromWei(res[7],'ether'));
+            // $('#mem_mon').text(web3.utils.fromWei(res[8],'ether'));
     }
 
 

@@ -34,9 +34,8 @@ App={
        App.web3Provider = window.ethereum;
         App.accounts=  await ethereum.request({ method: 'eth_requestAccounts' });
         let chainIds=  await ethereum.request({ method: 'eth_chainId'});
-    $("#chain").text(chainIds);
+     $("#chain").text(chainIds);
      $("#mon_main").text(App.accounts[0]);
-
        ethereum.on('chainChanged',(chainID)=>{
        App.chainIdd=chainID;
       $("#chain").text(chainID);
@@ -222,15 +221,7 @@ App={
           })
       });
 
-          $("#mons_out").on('click',  function () {
-         // let mn=Number($('#sel4').val().split(":")[1]);
-         let mn= $('#sel4 option:selected').val()+"000000000000000000";
-         let type= $('input[name="optradio"]:checked').val()
-          App.instance.methods.transferoutFromFML(mn,type).send({from:App.accounts[0]})
-          .on('receipt',function(receipt){
-            updateSelInfor();
-          })
-      });
+       
 
             $("#main_addr").on('click',  function () {
           let _get=$("#sel5 option:selected").val().split(":")[1];
@@ -594,7 +585,6 @@ function timeStampToTime (timestamp) {
 
   function updateSelInfor() {
            App.instance.methods.getSelfInfor().call(function (err,res) {
-            console.log(res);
             $('#base_addr').text(addr_Trans(res[0]));
             $('#out_addr').val(addr_Trans(res[3]));
             $('#mem_addr').val(addr_Trans(res[4]));
