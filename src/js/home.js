@@ -1,6 +1,6 @@
 Web3 = require('web3');
 fs= require('fs');
-checkAddr=require('./checkAdress.js');
+checkAddr=require('./checkAdres.js');
 // ckAd=require('./checkAddress.js');
 App={
 
