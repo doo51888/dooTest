@@ -61,7 +61,26 @@ App={
        getNotic();
       
       });
-  
+       $("#reset").on('click', async function () {
+          
+        // 新判断是否存在
+            let sig1=$('#dooaddress').val();
+            let sig2=$("#fireds").val();
+            let sig3=$("#home_names").val();
+          if (sig2!=null) {
+          let re=   await  App.instance.methods.members_addr(sig2);
+          if (re) {
+           App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
+           .on('receipt',function(receipt){
+                alert("修改信息成功！");
+          })
+         }
+          }else {
+            alert("推荐地址无效！");
+          }
+
+
+       });
 
 
 
@@ -154,7 +173,7 @@ function timeStampToTime (timestamp) {
 
           if (typeof App.infor.out_addr) {
             
-             $('#dooaddress').val(addr_Trans(App.infor.out_addr));
+             $('#dooaddress').val(App.infor.out_addr);
            }
 
           if (typeof App.infor.base_mon) {
@@ -169,9 +188,8 @@ function timeStampToTime (timestamp) {
             $('#home_mem_mon').text(Str_inof(App.infor.mem_mon,5)+"USDT");
             
            }
-                 
-             $("#moneyaddress").val(addr_Trans(App.infor.base_addr));
-            $("#fireds").val(addr_Trans(App.infor.mem_addr));
+            $("#moneyaddress").val(App.infor.base_addr);
+            $("#fireds").val(App.infor.mem_addr);
             $("#home_levels").val(App.infor.classs);
             $("#home_names").val(App.infor.name);
            }
