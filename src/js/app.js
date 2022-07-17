@@ -132,6 +132,94 @@ App={
            get_approve_edu();
     });
 
+         $("#getlog_in").on('click', async function  () {
+        
+      let  tb= await web3.eth.getBlockNumber();
+      let mmm =tb-App.originalBlock;
+      if (mmm<4000) {
+      App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock, toBlock: 'latest'},function (error,result) {
+ return result;
+  })
+.then(x=>{
+   UpdateInLog(x);
+  });
+      }else {
+        let _mmm=Math.floor(mmm/4000);
+        for (let i = 0; i <=_mmm; i++) {
+          if (i==0) {
+       App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock, toBlock:App.originalBlock+4000},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+          }
+          else {
+            if (App.originalBlock+(i+1)*4000>=tb) {
+                   App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock+4000*i, toBlock: 'latest'},function (error,result) {
+  
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+            }
+            else {
+                   App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock+i*4000, toBlock: App.originalBlock+(i+1)*4000},function (error,result) {
+  
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+            }
+
+          }
+
+        }
+
+      }
+
+
+//-------------------
+  if (mmm<4000) {
+      App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock, toBlock: 'latest'},function (error,result) {
+ return result;
+  })
+.then(x=>{
+   UpdateOutLog(x);
+  });
+      }else {
+       let _mmm=Math.floor(mmm/4000);
+        for (let i = 0; i <=_mmm; i++) {
+          if (i==0) {
+       App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock, toBlock: App.originalBlock+4000},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateOutLog(x);
+  });
+          }
+          else {
+            if (App.originalBlock+(i+1)*4000>=tb) {
+                   App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock+4000*i, toBlock: 'latest'},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateOutLog(x);
+  });
+            }
+            else {
+                   App.instance.getPastEvents ('outRecord',{filter: {"_to":App.accounts[0]}, fromBlock: App.originalBlock+i*4000, toBlock: App.originalBlock+(i+1)*4000},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateOutLog(x);
+  });
+            }
+
+          }
+
+        }
+
+      }
+      }) ;
+
+
  }
 
 

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>login_test</title>
+	 <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+     <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>	
+    
+     <!-- <script src="web3.min.js"></script> -->
+   <!--    <script src="truffle-contract.js"></script>	 -->
+     <script src="./build/buildle.js"></script>	
+<!--      <script src="./js/ceshi.js"></script>	 -->
+<!--     <script src="./js/app.js"></script> -->
+</head>
+<body>
+<br>
+<br>
+<br>
+<div class="container">
+<label>当前账户：</label> <label id="mon_main">hjjggs</label>   &nbsp&nbsp&nbsp <label>可用usdt:</label> <label id="usdt_cu">0</label>&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<label >当前链是：</label> <label id="chain"></label>
+</div>
+	<br>
+	<div class="container">
+   <form action="" >
+     <label for="sel2" class="form-label">余额：</label> &nbsp&nbsp&nbsp<label for="sel2" class="form-label" id="balance">0</label> 
+     <br>
+     <label for="sel2" class="form-label">授权额度：</label> &nbsp&nbsp&nbsp<label for="sel2" class="form-label" id="approve_edu">0</label> 
+      <select class="form-select" id="sel5" name="sellist5" style="width: 560px;">
+      <option>钱包账户1:0xA657E7cc81C6b667E95A7367035020C066Ad7E81</option>
+      <option>钱包账户2:0x5bCF890845E4cD6A1A645D2f13C0B5b481415970</option>
+      <option>钱包账户3:0x0695069F68aC09044c3F5FaAB0E3E9fc90626f4E</option> 
+      <option>钱包账户4:0x4E7aad93E6858f0dACf8d8951Dfea981E7F115AC</option>
+      <option>钱包账户5:0xb50bbF8b811CD38146108F597c9bBCfa5f26Fe4D</option>
+     <option> usdtdt:0xB8AfDC29EC2A48e253023384F2ee22874875448A</option>
+      <option>test-binan-test:0xaD4d8cAbb9D2C6B495Fb5EeFeEf871dE356c0ee7</option>
+    </select>
+    </select>
+     <label for="sel2" class="form-label">选择金额：</label>
+      <select class="form-select" id="sel4" name="sellist4" style="width: 120px;" >
+      <option>1</option>
+      <option>5</option>
+      <option>10</option>
+      <option>20</option>
+      <option>50</option>
+      <option>100</option>
+      <option>500</option>
+      <option>1000</option>
+      <option>5000</option>
+    </select>
+  </form>
+</div>
+<div class="container mt-3">
+  <h2>单选框</h2>
+  <p>选择转出类型：</p>
+  <form action="/action_page.php">
+      <input type="radio" class="form-check-input" id="radio1" name="optradio" value="5"  checked>
+      <label class="form-check-label" for="radio1">基本仓提款</label>
+      <input type="radio" class="form-check-input" id="radio2" value="6" name="optradio" >
+      <label class="form-check-label" for="radio2">利润仓提款</label>
+     <input type="radio" class="form-check-input" id="radio3"  value="7" name="optradio" >
+      <label class="form-check-label" for="radio3">推荐仓提款</label>
+  </form>
+</div>
+ <div class="container">
+  <button id="usdt_trans" >Usdt划拨</button>
+  <button id="mons_in" >doo合约充值</button>
+   <button id="mons_out">提款</button>  
+  <button id="fmlApprove">授权</button>
+  <button id="main_addr">收款地址</button>
+  <button id="add_profit">增加Profit</button>
+  <button id="add_mem">增加mem</button>
+  <button id="admin_to_contract">管理员给合约充值</button>
+  <button id="tream_number">团队Number</button><input type="text" name="tream_number" style="width: 80px;" id="_tream_number"  placeholder="6位数字">
+</div>
+<div class="container mt-3">
+    <button id="setNotic">设置公告</button>  &nbsp <input type="text" name="notic" style="width: 400px;" id="_notic" value="ceshi">
+  <br>
+  <br>
+  <button id="refresh">刷新</button>
+  <button id="getlog">获取日志</button> 
+  <button id="newlog">最新日志</button> 
+  <button id="reset">修改信息</button> 
+  <button id="rerel">刷新余额</button>
+  <button id="mag_member">管理推荐人</button><label>类型</label><input placeholder="0-fasle 1-true" type="text" name="init_member" id="class_type_member" width="150px"> 
+  <button id="Initialize">初始化</button>  
+  <label>利润仓提款最小值</label><input type="text" name="init_" id="allow_min_profit" width="60px" value="10">
+  <br>
+  <label>推荐仓提款最小值</label><input type="text" name="init_" id="allow_min_mem" width="60px" value="5"> 
+   <br>
+   <br>
+  <button id="set_class">单独设置class</button><label>类型</label><input placeholder="1-团队长 0-推荐人 2-默认" type="text" name="init_" id="class_type" width="60px"> <label>值</label><input type="text" name="init_" id="class_value" width="60px" value="10">
+  <br> 
+  <br>
+   <button id="set_new_addr">推荐/团长地址</button><label>类型</label><input placeholder="0-团队长 1-推荐人 " type="text" name="init_" id="addr_type" width="60px"> <label>新地址</label><input type="text" name="init_" id="new_addr_value" width="60px" >
+  <br> 
+  <br>
+
+  <table >
+        <tr><td>doo地址：</td><td><input type="text" id="out_addr" style="width: 450px;"></td></tr>
+        <tr><td>昵称：</td><td><input type="text" id="name" style="width: 450px;"></td></tr>
+        //初次绑定以后将无法修改  //readonly="readonly"
+        <tr><td>推荐人：</td><td><input type="text" id="mem_addr" style="width: 450px;readonly"></td></tr>
+        <tr><td>本地址：</td><td><label id="base_addr">  </label></td></tr>
+        <tr><td>星级：  </td><td><label id="classs">   0  </label></td></tr>
+        <tr><td>基本仓：</td><td><label id="base_mon">  0USDT </label></td></tr>
+        <tr><td>利润仓：</td><td><label id="porfit_mon">0USDT </label></td></tr>
+        <tr><td>推荐仓：</td><td><label id="mem_mon">   0USDT </label></td></tr>
+  </table>
+  <br> 
+   <br>
+  <label >钱包日志:</label>
+  <table class="table table-striped" >
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>钱包</th>
+        <th>doo</th>
+        <th>锁仓</th>
+      </tr>
+    </thead>
+    <tbody id="tables_out">
+
+    </tbody>
+  </table>
+   <label >doo日志:</label>
+   <table class="table table-striped" >
+    <thead>
+      <tr>
+        <th>时间</th>
+        <th>类型</th>
+        <th>金额</th>
+        <th>余额</th>
+      </tr>
+    </thead>
+    <tbody id="tables_in">
+    </tbody>
+  </table>
+</div>
+ <br>
+ <div class="container mt-3">
+  <h2>会员汇总</h2> <button id="customs_get">刷新</button>
+  <table class="table table-striped" id="customs_table">
+    <thead>
+      <tr>
+        <th>name</th>
+         <th>baseAdd</th>
+        <th>dooAdd</th>
+        <th>MemberAdd</th>
+        <th>OrAdd</th>
+        <th>baseC</th>
+        <th>profitC</th>
+        <th>memberC</th>
+        <th>memClass</th>
+        <th>OrClass</th>
+        <th>Deep</th>
+        <th>Number</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+</div>
+<div>
+  <p id="logs_re"></p>
+</div>
+<div>
+
+</div>
+</body>
+</html>
+
