@@ -85989,20 +85989,22 @@ App={
        $("#reset").on('click', async function () {
           
         // 新判断是否存在
+
             let sig1=$('#dooaddress').val();
             let sig2=$("#fireds").val();
             let sig3=$("#home_names").val();
-            if (sig2!=null) {
-            let re=   await  App.instance.methods.members_addr(sig2);
-            if (re) {
-           App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
+            App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
            .on('receipt',function(receipt){
                 alert("修改信息成功！");
           })
-         }
-          }else {
-            alert("推荐地址无效！");
-          }
+         //    if (sig2!=null) {
+         //    let re=   await  App.instance.methods.members_addr(sig2);
+         //    if (re) {
+         
+         // }
+         //  }else {
+         //    alert("推荐地址无效！");
+         //  }
 
 
        });

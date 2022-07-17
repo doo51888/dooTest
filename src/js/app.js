@@ -234,7 +234,6 @@ App={
       });
       $("#fmlApprove").on('click',  function () {
          let mn= $('#sel4 option:selected').val();
-         alert(mn+"USDT");
           App.fml_instance.methods.approve(App.contract_Addr,mn+"000000000000000000").send({from:App.accounts[0]})
           .on('receipt',function(receipt){
         
