@@ -50,8 +50,14 @@
     top: 8%;
       }
 
-      
+     #anniu:focus{
+      outline: none;
+     } 
+     #anniu:active{
 
+　　outline:none;
+
+}
   </style>
 </head>
 <body style="margin: 0;padding: 0; width: 100%;height: 100%;">
@@ -68,13 +74,28 @@
     <!-- 侧边栏 -->
     <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="float: right;"><img src="./picture/cebianlan.png" style="width: 22px; height=22px;"></button>
  
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 60%;">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 56%;">
   <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel">显示在右侧侧边栏</h5>
+    <!-- <h5 id="offcanvasRightLabel">显示在右侧侧边栏</h5> -->
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
-    ...
+  <div class="offcanvas-body"><!-- -----------主体内容------------- -->
+   <h2 style="font-weight: bold;"><img src="./picture/logo.jpg" style="width: 26px; height: 26px;margin-left: 6px;margin-right: 6px;">DOO仓</h2> 
+   <br>
+   <div style="width: 80%;height: 34px;  background-color: #5c56e3;border-radius: 10px;font-size:small;color: white;text-align: center;line-height: 34px;margin-left: 6px;">诚信/便捷/高效</div>
+   <br>
+<ul style="list-style-type: none;">
+  <li style="margin-bottom: 16px;"><i class="bi bi-grid-fill" style="color:#5c56e3 ;font-size: large;padding-right: 10px;vertical-align:middle;"></i> <a href="#" style="text-decoration: none;color: black;font-weight: 500;vertical-align:middle;">doo仓概要</a></li>
+
+  <li><i class="bi bi-file-person-fill" style="color:#5c56e3 ;font-size: large;padding-right: 10px;vertical-align:middle;"></i><a href="home.html" style="text-decoration: none;color: black;font-weight: 500;vertical-align:middle;">个人中心</a></li>
+<li style="margin-top: 220%;"><i class="bi bi-patch-question-fill" style="color:#dadcdc ;font-size: large;padding-right: 10px;vertical-align:middle;"></i><a href="" style="text-decoration: none;color: black;font-weight: 500;vertical-align:middle;">帮助中心</a></li>
+
+<li style="color:#dadcdc ;padding-top: 6px;">______________________________________</li>
+<li style="color:#dadcdc ;font-size:small;float: right;padding-right: 6px;padding-top: 6px;">V1.0</li>
+</ul>
+  
+  
+   
   </div>
 </div>
 <!-- ================================================================================================== -->
@@ -122,9 +143,9 @@
     		<!-- 第一部分下面灰色框 -->
     	<div style="height: 150px;width: 100%;background-color:#f4f6f9 ;margin:0 auto;position: absolute;border-radius:15px;line-height: 250px;">
     		<span style="float: left;padding-left: 4%;color:#5d5d5d;">选择转入额度 </span>
-        <i class="bi bi-arrow-right-circle"></i>
+        <i class="bi bi-arrow-right-circle" style="font-size: 16px;color: #5c56e3;"></i>
          <!-- 授权金额ul列表 -->
-         <div class="select_wrap" style=" float: right;width: 50%; height:28px;  margin-top: 38%;margin-right: 5%;font-size: small;">
+         <div class="select_wrap" style=" float: right;width: 50%; height:28px;  margin-top: 110px;margin-right: 5%;font-size: small;">
           <!-- select标签删除了appearance:none;background:none （去掉默认样式）-->
            <select  style=" float: right; border:none;outline:none; width: 50%; height: 28px;line-height: 20px;margin-right: -6px;background-color: white;color: #292a2b;">
         <option value="1" style="">100USDT</option>
@@ -136,11 +157,11 @@
     	</div>
     	<!-- -------------------------------------------- -->
     	<!-- 第一部分白框 -->
-    	<div style="height: 100px;width: 100%;background: #ffffff;margin:0 auto;border-radius:15px;position: absolute;">
+    	<div style="height: 100px;width: 100%;background: #ffffff;border-radius:15px;position: absolute;">
         <!-- 地址 -->
     		<div style="float: left;margin-top: 14%;margin-left: 5%;">
     			<span style="color: #919292;">钱包地址:</span>
-    			<p style="clear: left; word-wrap: break-word;line-height: 480%;color: #919292;font-weight: bold;">dfbvgggddssss</p>
+    			<p style="clear: left; word-wrap: break-word;line-height: 480%;color: #919292;font-weight: bold;">dfbvgggddssss<i class="bi bi-back" style="padding-left: 4px;"></i></p>
     		</div>
        <!-- 余额 -->
     		<div style="margin-top: 14%;margin-right:-38%;color: #616161;">
@@ -148,7 +169,7 @@
     		</div>
         <!-- 下拉菜单 -->
        
-          <div  style="clear: left;  float: right;width: 80%; height:28px;  margin-top: -18%;font-size: 16px;position: relative;">
+          <div  style="  float: right;width: 80%; height:28px;  margin-top: -54px;font-size: 16px;position: relative;">
          <img src="./picture/BA.jpg" id="img01" style="width: 24px;height: 24px;margin-left: -26%;margin-right: -90%;margin-top: 2%;">
          <a id="dropdownMenuButton1" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" style="color: #292a2b;margin-right: 2%;float: right;">BSC&nbsp</a>
 
@@ -165,11 +186,20 @@
     		   <!-- -------------------------------- -->
     	</div>
       <!-- ---------------白框---------------------end--------- -->
+     
+     
+
 
       <!-- 版本号1 -->
-        <div style="width: 20%;height: 35px;background-color: #efeefd;position: absolute;z-index: 500;margin-top: -4%;right: -4%;border-top-right-radius: 28px;border-bottom-left-radius:28px;color: #5c56e3;font-size: small;font-weight: bold;line-height:35px;">V1
+        <div style="width: 20%;height: 35px;background-color: #efeefd;position: absolute;z-index: 500;margin-top: -15px;right: -14px;border-top-right-radius: 28px;border-bottom-left-radius:28px;color: #5c56e3;font-size: small;font-weight: bold;line-height:35px;">V1
       </div>
       <!-- ------------------------------- -->
+ 
+
+
+
+
+----------------------------------------
     	</div>
 
 <script >
@@ -184,11 +214,8 @@ $("#img01").attr("src",mn);
     	<!-- ================ -->
     
     	<!-- 第二部分 -->
-      <!-- 箭头小图标 -->
-      <div style="width: 100%;height: 12px;">
-   <!-- <i class="bi bi-arrow-down" style="float: left;margin-left:5%;margin-top: 1%;"></i>
-   <i class="bi bi-hand-index-thumb"style="color: gray;float: left;margin-left: -18px;margin-top: 10%;font-size: large"></i> --> 
-      </div>
+      
+    
        <!-- 第二部分白色框部分 -->
     	<div class="container mt-3" style="height: 100px;width: 100%;background: #ffffff;margin:0 auto;border-radius:15px;margin-top: 50%;">
 
@@ -196,7 +223,7 @@ $("#img01").attr("src",mn);
         <div style="width: 50%;height:50px ;margin-top: 8%;">
           <a href="#" style="color: #5c56e3;"><i class="bi bi-file-earmark-text"style="font-size:x-large;float: left;margin-left:5%;"></i></a>
         <i class="bi bi-arrow-up-left" style="color: gray;float: left;margin-top: 10%;font-size: small;margin-left: -2%;"></i>
-         <p style="float: left;margin-left: -38px;margin-top: 30%;color: #919292;">进入授权...</p>
+         <span style="float: left;margin-left: -38px;margin-top: 30%;color: #919292;">进入授权...</span>
         </div>
         <div style="width: 50%;height:100px ;margin-top: -15%;margin-right: -16%; float: right;color: #5d5d5d;">
           <p style="">授权额度</p>
@@ -208,10 +235,11 @@ $("#img01").attr("src",mn);
       <!-- ================================================================ -->
       <!-- 第三部分 -->
       <div style="width: 100%;height: 110px;">
-     
+ 
      <h5 style="margin-top: 6%;float: left;margin-left: 4%;color: #919292;"> doo仓账户</h5>
-     <p style="color: #919292;margin-top: 12%;float: left;margin-left: -20%;font-weight: bold;">hhjknnwwdal</p>
-      <a href="#" style="color: #5c56e3;font-size: small;float: right;margin-right: -30%;margin-top: 5%;font-weight: bold;">+高级设置</a>
+     <p style="color: #919292;margin-top: 12%;float: left;margin-left: -20%;font-weight: bold;">hhjknnwwdal<i class="bi bi-back" style="padding-left: 4px;"></i></p>
+
+      <a href="home.html" style="color: #5c56e3;font-size: small;float: right;margin-right: -30%;margin-top: 5%;font-weight: bold;">+高级设置</a>
      <!-- 弹窗 -->
      <div style="float: left;width: 100%;">
 <!-- ******************* -->
@@ -220,10 +248,10 @@ $("#img01").attr("src",mn);
   
   <!-- 按钮：用于打开模态框 -->
   <br>
-  <a  data-toggle="modal" data-target="#myModal" style="margin-left: -86%;text-decoration:underline;color: #5c56e3;font-weight: bold;">
-    转入明细
-  </a>
-   
+
+   <button type="button" id="anniu" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: -86%;appearance:none;background:none;color: #5c56e3;font-weight: bold;border: none;text-decoration:underline;outline: none;">
+     转入明细
+  </button>
   <!-- 模态框 -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
@@ -279,22 +307,184 @@ $("#img01").attr("src",mn);
 <!-- ------------------------------------------ -->
 
       </div>
-
-
     	
     	<!-- 第四部分 --><!-- 按钮 -->
     	<div style="height: 50px;width: 100%;">
-    		
+    	<br>
      <button type="submit" class="btn btn-primary mt-3" style="width: 96%;height: 56px;font-size: small;background: #5c56e3;border-radius:18px">确定转入</button>
     	</div>	
      
     </div>
-    <!-- 选项卡2 -->
-    <div id="menu1" class="container tab-pane "><br>
 
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+    <!-- 选项卡2 -->
+    <div id="menu1" class="container tab-pane " style="width: 100%;height:480px;"><br>
+    <!-- 第一部分 --> 
+    <br>
+    <div style="width: 100%;height:140px;background-color: #f2f6fe;border-radius:15px;line-height: 140px;">
+      <!-- 左边框 -->
+    <div style="width: 36%;height: 120PX;background-color: #fafafc;float: left;color: #f4f4f5;margin-left: 8px;margin-top: 10px;">
+    <div style="margin-top: 40px;line-height: 26px;color:#919292 ;">
+    doo仓账户:
+    <p style="color:  #919292;">sdfsdfsdfsf<i class="bi bi-back" style="padding-left: 4px;"></i></p> 
+   </div>
+    </div><!-- ----------------左框---end-------------------- -->
+    <!-- 仓位基本信息 -->
+  <div class="container" style="width: 50%;height:120px ;float: right;line-height: 24px;margin-top: 10px;" >
+  <div  style="height:22px ;color: #616161;">
+    
+   基本仓:<span>1000USDT</span> <i class="bi bi-bag-check-fill" style="color:#5c56e3;font-size: small;margin-left: 4px;"></i>
+ 
+  </div>
+
+  <br>
+  <div style="height:22px ;color: #616161;">
+    利润仓:<span>1000USDT</span><span class="badge " style="background-color:#f0933b ;margin-left: 4px;">min:10</span>
+   
+  </div>
+  <br>
+  <div  style="height:22px ;color:#616161;">
+  
+  推荐仓:<span>1000USDT</span><span class="badge" style="background-color:#f0933b ;margin-left: 4px;">min:5</span>
+   
+  </div>
+
+</div><!-- ---------------------end---仓位基本信息------- -->
+
+</div><!-- ----------第一部分--end-------------------------- -->
+
+<!-- 第二部分 -->
+<br>
+<div style="width: 100%;height:80px;background-color: #ffffff;border-top-right-radius: 15px;border-top-left-radius: 15px;">
+ 
+    <!-- 折叠 -->
+    <div class="container " style="">
+      
+     <div id="accordion" style="">
+        <div >
+
+<!-- &&&&&&&&&&&&&&&&&金额列表 -->
+          <div class="select_wrap" style=" float: right;width: 62%; height:28px;margin-right: 8%;font-size: small;margin-top: 10px;">
+          <!-- select标签删除了appearance:none;background:none （去掉默认样式）-->
+           <select  style=" float: right; border:none;outline:none; width: 50%; height: 28px;line-height: 20px;margin-right: -14px;background-color: white;color: #292a2b;">
+        <option value="1" style="">基本仓</option>
+        <option value="1" style="">利润仓</option>
+        <option value="1" style="">推荐仓</option>
+       </select>
+        </div> 
+
+          <!-- &&&&&&&&&&&&&&& -->
+            <div style="margin-top: 20px;">
+
+              <i class="bi bi-chat-square-text" style="color:#5c56e3 ;font-size: large;"></i><br>
+                <a  data-bs-toggle="collapse" href="#collapseOne" style="color: #616161;text-decoration:underline;">
+                最新消息
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse " data-bs-parent="#accordion"style="" >
+                <div  >
+                #1 内容：菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<!-- --------------折叠end---------------************ -->
+ 
+</div><!-- --------第二部分--end---------- -->
+
+<!-- 第三部分 -->
+<div class="container " style="width: 100%;height:50px;background-color: #f4f6f9;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;">
+  <div style="float: left;margin-top: 10px;margin-left: 10%;"></div>
+  <div class="input-group " style="margin-top: -50%;margin-left: 4%;clear: left;">
+    <input type="text"  placeholder="请输入转出数量" style="appearance:none;background:none ;border:none;outline:none;background-color: #fafafc;width: 200px;height:30px;color:#5c56e3;font-weight: bold;padding-left: 5px;">
+    <span style="color: #5c56e3;font-size: large;font-weight: bold;padding-left: 5px;">USDT</span> 
+  </div>
+
+</div>
+
+<!-- ----------第三部分-------end------------ -->
+<!-- 第四部分 -->
+<div style="width: 100%;height: 80px;">
+  <!-- 弹窗 -->
+  <br>
+  <br>
+     <div style="float: left;width: 100%;">
+<!-- ******************* -->
+      <!-- 模态框 -->
+<div class="container" style="">
+  
+  <!-- 按钮：用于打开模态框 -->
+  <br>
+
+   <button type="button" id="anniu" class="btn btn-primary" data-toggle="modal" data-target="#myModa2" style="margin-left: -86%;appearance:none;background:none;color: #5c56e3;font-weight: bold;border: none;text-decoration:underline;outline: none;">
+     转入明细
+  </button>
+  <!-- 模态框 -->
+  <div class="modal fade" id="myModa2">
+    <div class="modal-dialog">
+      <div class="modal-content" style="margin-top: 140%;">
+   
+        <!-- 模态框头部 -->
+        <div >
+         
+          <button type="button" class="close" data-dismiss="modal" style="margin-right: 2%;margin-top: 2%">&times;</button>
+        </div>
+   
+        <!-- 模态框主体 -->
+        <div class="modal-body" style="width: 100%;height: 150px;overflow-y:auto">
+          
+          <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+          <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+          <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+        </div>    
+   
+      </div>
+    </div>
+  </div>
+  
+</div>
+   
+<!-- ************************ -->
+     </div>  
+
+     </div>
+<!-- ---------------第四部分----end------------------------ -->
+
+<!-- 第五部分 -->
+
+<div style="height: 50px;width: 100%;">
+      
+     <button type="submit" class="btn btn-primary mt-3" style="width: 96%;height: 56px;font-size: small;background: #5c56e3;border-radius:18px">确定转出</button>
+      </div>  
+   <!-- ------------------第五部分----end--------------    -->
+    </div><!-- ----------------------选项卡2 end----------------------------- -->
     
   </div>
 
