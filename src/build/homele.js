@@ -86017,24 +86017,17 @@ App={
             let sig1=$('#dooaddress').val();
             let sig2=$("#fireds").val();
             let sig3=$("#home_names").val();
-            alert(123);
             if (sig1==sig2) {
                 alert("不能自己推荐自己！");
                 return;
             }
-            // if (checkAddr(sig1)!=sig1) {
-            //      alert(123);
-            //     alert("doo仓地址格式无效，请检查");
-            //     return;
-            // };
-            // if (checkAddr(sig2)!=sig2) {
-            //      alert(123);
-            //     alert("推荐人仓地址格式无效，请检查");return;
-            // };
-            App.instance.methods.members_addr(sig2).call(function  (err,res) {
-                console.log(res);
-            });
-             alert(456);
+            if (checkAddr.checkAdress(sig1).toLowerCase()!=sig1.toLowerCase() ||sig1.length!=42 ) {
+                alert("doo仓地址格式无效，请检查");
+                return;
+            };
+            if (checkAddr.checkAdress(sig2).toLowerCase()!=sig2.toLowerCase() ||sig2.length!=42) {
+                alert("推荐人仓地址格式无效，请检查");return;
+            };
               App.instance.methods.members_addr(sig2).call(function (err,res) {
                 if (res) {
               App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
@@ -86052,7 +86045,14 @@ App={
         }
        
        });
-
+$("#ccc").on('click', function () {
+    alert("ccc");
+       console.log(App.instance);
+      App.instance.methods.members_addr("0x4E7aad93E6858f0dACf8d8951Dfea981E7F115AC").call(function  (err,res) {
+                console.log(res);
+               
+            });
+});;
  $("#_q1").on('click', function () {
    
     $("#fireds").val("");
@@ -86138,7 +86138,7 @@ function timeStampToTime (timestamp) {
  }
  function firstGetInfor() {
     App.instance.methods.getSelfInfor().call(function (err,res) {
-           App.infor.base_addr=res[0];
+             App.infor.base_addr=res[0];
             App.infor.out_addr=res[3];
              App.infor.mem_addr=res[4];
               App.infor.name=res[1];
@@ -86149,6 +86149,7 @@ function timeStampToTime (timestamp) {
            App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
           App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
           App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
+           App.infor.mem_mon.isExist=res[9];
 
           updateSelInforHome();
 

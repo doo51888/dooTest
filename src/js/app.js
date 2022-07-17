@@ -70,6 +70,7 @@ App={
       firstGetInfor();
       get_mon();
       get_approve_edu();
+      getNotic();
       });
          $.getJSON('./artifacts/fml.json',  function(data){
        App.fml_instance =  new web3.eth.Contract(data.abi,App.contract_usdtd,{from:App.accounts[0]});
@@ -190,11 +191,14 @@ App={
       });
       //transin 转入事件
        $("#transin").on('click',  function () {
-        if (!App.isRunIn) {
-  
-    
-           let mn= $('#sel4 option:selected').val()+"000000000000000000";
-          App.instance.methods.transferInFromFML(mn).send({from:App.accounts[0]})
+        let mn= $('#sel4 option:selected').val();
+            if (!App.infor.isExist) {
+              alert("请先完善doo仓信息！");
+              return;
+            }
+            else {
+              if (App.infor.approv>mn) {
+                 App.instance.methods.transferInFromFML(mn+"000000000000000000").send({from:App.accounts[0]})
           .on('receipt',function(receipt){
                get_mon();
            get_approve_edu();
@@ -203,19 +207,33 @@ App={
            //更新基本仓
        
           })
+              }
+              else {
+                alert("授权额度不足，请先授权！");
+              }
+               
+         
+            }
+    
+         
       
-        }
+    
        
          // let mn=Number($('#sel4').val().split(":")[1]);
         
       });
+        $("#_copy").on('click', function () {
+   
+     copyContent();
+       });
+
        //添加一个刷新按钮
         $('#refresh').on('click', function () {
        updateSelInfor();
        getNotic();
       
       });
-      $("#transin").on('click',  function () {
+      $("#dropdownMenuButton1").on('click',  function () {
          App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
            $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),5) +"USDT");
           });
@@ -233,13 +251,18 @@ App={
       
       });
       $("#fmlApprove").on('click',  function () {
-         let mn= $('#sel4 option:selected').val();
+        if (!App.infor.isExist){
+         alert("请先检查doo仓是否已经创建！");
+        }else {
+            let mn= $('#sel4 option:selected').val();
           App.fml_instance.methods.approve(App.contract_Addr,mn+"000000000000000000").send({from:App.accounts[0]})
           .on('receipt',function(receipt){
         
            get_approve_edu();
           
           })
+        }
+       
        });
          
 
@@ -268,6 +291,13 @@ App={
  * 
  *  公共函数
  **/ 
+    function copyContent() {
+             var Url=document.getElementById(x);
+             Url.select(); // 选择对象
+             document.execCommand("Copy"); // 执行浏览器复制命令
+             alert("复制成功");
+     }
+
 // 获取当前余额
   async function  UpdateLog(){
       let  tb= await web3.eth.getBlockNumber();
@@ -367,7 +397,8 @@ function get_mon () {
 function get_approve_edu() {
    App.fml_instance.methods.allowance(App.accounts[0],App.contract_Addr).call(function (err,res) {
 
-             $("#approve_edu").text( Str_inof(web3.utils.fromWei(res),5)+"USDT");
+             App.infor.approv=web3.utils.fromWei(res,'ether');
+             $("#approve_edu").text( Str_inof(web3.utils.fromWei(res,'ether'),5)+"USDT");
             })
 }
 
@@ -563,6 +594,7 @@ function timeStampToTime (timestamp) {
           App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
           App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
             App.infor.limiteTime=res[5];
+             App.infor.mem_mon.isExist=res[9];
      });
 
  }
@@ -579,6 +611,7 @@ function timeStampToTime (timestamp) {
            App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
           App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
           App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
+           App.infor.mem_mon.isExist=res[9];
           updateSelInfor();
           UpdateLog();
      });
@@ -586,7 +619,7 @@ function timeStampToTime (timestamp) {
 
   function updateSelInfor() {
           if (typeof App.infor.out_addr) {
-        if ( App.infor.out_addr!="ox0000000000000000000000000000000000000000") {
+            if ( App.infor.isExist) {
              $('#doo_account1').text(addr_Trans(App.infor.out_addr));
              $('#doo_account2').text(addr_Trans(App.infor.out_addr));
           if (typeof App.infor.base_mon) {
