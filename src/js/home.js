@@ -63,7 +63,7 @@ App={
        getNotic();
       
       });
-       $("#reset").on('click', async function () {
+       $("#reset").on('click',  function () {
           
         // 新判断是否存在
         if ($('#rememberChec').is(':checked')) {
@@ -71,25 +71,37 @@ App={
             let sig1=$('#dooaddress').val();
             let sig2=$("#fireds").val();
             let sig3=$("#home_names").val();
-           
+            alert(123);
             if (sig1==sig2) {
                 alert("不能自己推荐自己！");
                 return;
             }
-            if (checkAddr(sig1)!=sig1) {
-                alert("doo仓地址格式无效，请检查");
-                return;
-            };
-            if (checkAddr(sig2)!=sig2) {
-                alert("推荐人仓地址格式无效，请检查");return;
-            };
-             let re=   await  App.instance.methods.members_addr(sig2);
-             if (re) {  App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
+            // if (checkAddr(sig1)!=sig1) {
+            //      alert(123);
+            //     alert("doo仓地址格式无效，请检查");
+            //     return;
+            // };
+            // if (checkAddr(sig2)!=sig2) {
+            //      alert(123);
+            //     alert("推荐人仓地址格式无效，请检查");return;
+            // };
+            App.instance.methods.members_addr(sig2).call(function  (err,res) {
+                console.log(res);
+            });
+             alert(456);
+              App.instance.methods.members_addr(sig2).call(function (err,res) {
+                if (res) {
+              App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
            .on('receipt',function(receipt){
                 alert("修改信息成功！");
-          })}else {
-                  alert("推荐人地址无效！");return;
-             }
+          })
+
+                }
+                else {
+                     alert("推荐人地址无效！");return;
+                }
+             });
+
           
         }
        

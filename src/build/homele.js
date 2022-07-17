@@ -85922,8 +85922,31 @@ function noop() {}
 },{"global/window":485,"is-function":503,"parse-headers":546,"xtend":675}],675:[function(require,module,exports){
 arguments[4][243][0].apply(exports,arguments)
 },{"dup":243}],676:[function(require,module,exports){
+const createKeccakHash = require('keccak')
+
+exports.checkAdress =function (address) {
+  address = address.toLowerCase().replace('0x', '')
+  var hash = createKeccakHash('keccak256').update(address).digest('hex')
+  var ret = '0x'
+
+  for (var i = 0; i < address.length; i++) {
+    if (parseInt(hash[i], 16) >= 8) {
+      ret += address[i].toUpperCase()
+    } else {
+      ret += address[i]
+    }
+  }
+
+  return ret
+}
+
+
+
+
+},{"keccak":506}],677:[function(require,module,exports){
 Web3 = require('web3');
 fs= require('fs');
+checkAddr=require('./checkAdres.js');
 // ckAd=require('./checkAddress.js');
 App={
 
@@ -85981,12 +86004,12 @@ App={
   
 
        //添加一个刷新按钮
-        $('#refresh').on('click', function () {
+        $('#refresh').on('click', async function () {
        updateSelInfor();
        getNotic();
       
       });
-       $("#reset").on('click', async function () {
+       $("#reset").on('click',  function () {
           
         // 新判断是否存在
         if ($('#rememberChec').is(':checked')) {
@@ -85994,15 +86017,38 @@ App={
             let sig1=$('#dooaddress').val();
             let sig2=$("#fireds").val();
             let sig3=$("#home_names").val();
-            alert(sig3.length);
+            alert(123);
             if (sig1==sig2) {
                 alert("不能自己推荐自己！");
                 return;
             }
-            App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
+            // if (checkAddr(sig1)!=sig1) {
+            //      alert(123);
+            //     alert("doo仓地址格式无效，请检查");
+            //     return;
+            // };
+            // if (checkAddr(sig2)!=sig2) {
+            //      alert(123);
+            //     alert("推荐人仓地址格式无效，请检查");return;
+            // };
+            App.instance.methods.members_addr(sig2).call(function  (err,res) {
+                console.log(res);
+            });
+             alert(456);
+              App.instance.methods.members_addr(sig2).call(function (err,res) {
+                if (res) {
+              App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
            .on('receipt',function(receipt){
                 alert("修改信息成功！");
           })
+
+                }
+                else {
+                     alert("推荐人地址无效！");return;
+                }
+             });
+
+          
         }
        
        });
@@ -86181,4 +86227,4 @@ function timeStampToTime (timestamp) {
     App.ininWebs();
      });
 });
-},{"fs":1,"web3":659}]},{},[676]);
+},{"./checkAdres.js":676,"fs":1,"web3":659}]},{},[677]);
