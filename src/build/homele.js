@@ -85924,6 +85924,7 @@ arguments[4][243][0].apply(exports,arguments)
 },{"dup":243}],676:[function(require,module,exports){
 Web3 = require('web3');
 fs= require('fs');
+// ckAd=require('./checkAddress.js');
 App={
 
   logArrIn:[],
@@ -85985,7 +85986,26 @@ App={
        getNotic();
       
       });
-  
+       $("#reset").on('click', async function () {
+          
+        // 新判断是否存在
+            let sig1=$('#dooaddress').val();
+            let sig2=$("#fireds").val();
+            let sig3=$("#home_names").val();
+            if (sig2!=null) {
+            let re=   await  App.instance.methods.members_addr(sig2);
+            if (re) {
+           App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
+           .on('receipt',function(receipt){
+                alert("修改信息成功！");
+          })
+         }
+          }else {
+            alert("推荐地址无效！");
+          }
+
+
+       });
 
 
 
@@ -86078,7 +86098,7 @@ function timeStampToTime (timestamp) {
 
           if (typeof App.infor.out_addr) {
             
-             $('#dooaddress').val(addr_Trans(App.infor.out_addr));
+             $('#dooaddress').val(App.infor.out_addr);
            }
 
           if (typeof App.infor.base_mon) {
@@ -86093,9 +86113,8 @@ function timeStampToTime (timestamp) {
             $('#home_mem_mon').text(Str_inof(App.infor.mem_mon,5)+"USDT");
             
            }
-                 
-             $("#moneyaddress").val(addr_Trans(App.infor.base_addr));
-            $("#fireds").val(addr_Trans(App.infor.mem_addr));
+            $("#moneyaddress").val(App.infor.base_addr);
+            $("#fireds").val(App.infor.mem_addr);
             $("#home_levels").val(App.infor.classs);
             $("#home_names").val(App.infor.name);
            }
@@ -86118,6 +86137,7 @@ function timeStampToTime (timestamp) {
             // $('#porfit_mon').text(web3.utils.fromWei(res[7],'ether'));
             // $('#mem_mon').text(web3.utils.fromWei(res[8],'ether'));
   
+//<input οnkeyup=“value=value.replace(/[^\a-\z\A-\Z0-9]/g,’’)” οnpaste=“value=value.replace(/[^\a-\z\A-\Z0-9]/g,’’)” oncontextmenu = “value=value.replace(/[^\a-\z\A-\Z0-9]/g,’’)”>
 
        //字符串 截取函数，取前4位和 后4位，中间用3个小点
        function addr_Trans( str_in) {

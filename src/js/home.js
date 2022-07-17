@@ -1,5 +1,6 @@
 Web3 = require('web3');
 fs= require('fs');
+// ckAd=require('./checkAddress.js');
 App={
 
   logArrIn:[],
@@ -67,9 +68,9 @@ App={
             let sig1=$('#dooaddress').val();
             let sig2=$("#fireds").val();
             let sig3=$("#home_names").val();
-          if (sig2!=null) {
-          let re=   await  App.instance.methods.members_addr(sig2);
-          if (re) {
+            if (sig2!=null) {
+            let re=   await  App.instance.methods.members_addr(sig2);
+            if (re) {
            App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
            .on('receipt',function(receipt){
                 alert("修改信息成功！");
@@ -212,6 +213,7 @@ function timeStampToTime (timestamp) {
             // $('#porfit_mon').text(web3.utils.fromWei(res[7],'ether'));
             // $('#mem_mon').text(web3.utils.fromWei(res[8],'ether'));
   
+//<input οnkeyup=“value=value.replace(/[^\a-\z\A-\Z0-9]/g,’’)” οnpaste=“value=value.replace(/[^\a-\z\A-\Z0-9]/g,’’)” oncontextmenu = “value=value.replace(/[^\a-\z\A-\Z0-9]/g,’’)”>
 
        //字符串 截取函数，取前4位和 后4位，中间用3个小点
        function addr_Trans( str_in) {
