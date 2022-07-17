@@ -1,5 +1,6 @@
 Web3 = require('web3');
 fs= require('fs');
+checkAddr=require('./checkAdress.js');
 // ckAd=require('./checkAddress.js');
 App={
 
@@ -57,7 +58,7 @@ App={
   
 
        //添加一个刷新按钮
-        $('#refresh').on('click', function () {
+        $('#refresh').on('click', async function () {
        updateSelInfor();
        getNotic();
       
@@ -75,10 +76,21 @@ App={
                 alert("不能自己推荐自己！");
                 return;
             }
-            App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
+            if (checkAddr(sig1)!=sig1) {
+                alert("doo仓地址格式无效，请检查");
+                return;
+            };
+            if (checkAddr(sig2)!=sig2) {
+                alert("推荐人仓地址格式无效，请检查");return;
+            };
+             let re=   await  App.instance.methods.members_addr(sig2);
+             if (re) {  App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
            .on('receipt',function(receipt){
                 alert("修改信息成功！");
-          })
+          })}else {
+                  alert("推荐人地址无效！");return;
+             }
+          
         }
        
        });
