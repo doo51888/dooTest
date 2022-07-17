@@ -84,7 +84,7 @@ App={
   }
 
   },
-
+// mainNumber 建议每天更新一次 ， 可以设置成定时更新
 //chain_select 
  initBingEvent: function (){
 
@@ -114,7 +114,7 @@ App={
 
         $("#infor_notic").text("推荐仓可转出："+App.infor.mem_mon);
           }else {
-             $("#infor_notic").text("推荐仓不可转出，"+"原因是：当前利润仓USDT数量"+App.infor.mem_mon+"<5");
+             $("#infor_notic").text("推荐仓不可转出，"+"原因是：当前推荐仓USDT数量"+App.infor.mem_mon+"<5");
           }
           
         }
