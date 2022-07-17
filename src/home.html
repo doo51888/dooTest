@@ -55,8 +55,8 @@
 
 	  <div class="mb-3 mt-3">
 		<label for="names" class="form-label">doo昵称:</label>
-		<input type="names"  id="home_names" placeholder="请输入昵称" name="names" required style="background:none;outline:none;border:none;background-color: #f2f6fe;height: 30px;padding-left: 6px;width: 70%;">
-		<i class="bi bi-pencil-square" style="color: #919292;"></i>
+		<input type="names"  id="home_names"  maxlength="10" placeholder="请输入昵称" name="names" required style="background:none;outline:none;border:none;background-color: #f2f6fe;height: 30px;padding-left: 6px;width: 70%;" required onKeyUp="value=value.replace(/[\W]/g,'')" >
+		<i class="bi bi-pencil-square" style="color: #919292;" id="_q3"></i>
 	  </div>
 
 <div class="mb-3 mt-3">
@@ -66,25 +66,25 @@
 
 	  <div class="mb-3">
 		<label for="fireds" class="form-label">推荐地址:</label>
-		<input type="fireds"  id="fireds" placeholder="请输入推荐人名称" name="fireds" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;">
-		<i class="bi bi-pencil-square" style="color: #919292;"></i>
+		<input type="fireds"  id="fireds" placeholder="请输入推荐钱包地址" name="fireds" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;" required>
+		<i class="bi bi-pencil-square" style="color: #919292;" id="_q1" onKeyUp="value=value.replace(/[\W]/g,'')" ></i>
 		<p style="color: red;font-size: x-small;">注：只可绑定一次，以后无法修改！！！</p>
 	  </div>
-	  <div class="mb-3">
+	  <div class="mb-3"> 
 		<label for="dooaddress" class="form-label">doo地址:</label>
-		<input type="dooaddress"  id="dooaddress" placeholder="请输入doo仓地址" name="dooaddress" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;">
-		<i class="bi bi-pencil-square" style="color: #919292;"></i>
+		<input type="dooaddress"  id="dooaddress" placeholder="请输入doo仓地址" name="dooaddress" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;" onKeyUp="value=value.replace(/[\W]/g,'')" required>
+		<i class="bi bi-pencil-square" style="color: #919292;" id="_q2"></i>
 		<p style="color: red;font-size: x-small;">注：默认钱包地址，可修改！！！</p>
 	  </div>
       <div class="mb-3">
 		<label for="moneyaddress" class="form-label">钱包地址:</label>
 		<input type="moneyaddress"  id="moneyaddress" placeholder="sjidklllwrq" name="moneyaddress"  readonly   style="background:none;outline:none;border:none;background-color:#f6f8fc ;height: 30px;padding-left: 6px;width: 70%;">
-		<i class="bi bi-back" style="color: #919292;"></i>
+		<i class="bi bi-back" style="color: #919292;" id="_copy"></i>
 	  </div>
 
 	  <div class="form-check mb-3">
 		<label class="form-check-label">
-		  <input class="form-check-input" type="checkbox" name="remember"> Remember me
+		  <input class="form-check-input" type="checkbox" name="remember" id="rememberChec"> 已仔细核对地址！！
 		</label>
 	  </div>
 	  <button  class="btn btn-primary" style="width: 96%;height: 40px;font-size: small;background: #5c56e3;border-radius:18px" id="reset">提交</button>

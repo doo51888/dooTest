@@ -85989,34 +85989,47 @@ App={
        $("#reset").on('click', async function () {
           
         // 新判断是否存在
+        if ($('#rememberChec').is(':checked')) {
 
             let sig1=$('#dooaddress').val();
             let sig2=$("#fireds").val();
             let sig3=$("#home_names").val();
+            alert(sig3.length);
+            if (sig1==sig2) {
+                alert("不能自己推荐自己！");
+                return;
+            }
             App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
            .on('receipt',function(receipt){
                 alert("修改信息成功！");
           })
-         //    if (sig2!=null) {
-         //    let re=   await  App.instance.methods.members_addr(sig2);
-         //    if (re) {
-         
-         // }
-         //  }else {
-         //    alert("推荐地址无效！");
-         //  }
-
-
+        }
+       
        });
 
-
+ $("#_q1").on('click', function () {
+   
+    $("#fireds").val("");
+ });
+  $("#_q2").on('click', function () {
+   
+     $("#dooaddress").val("");
+ });
+   $("#_q3").on('click', function () {
+   
+     $("#home_names").val("");
+ });
 
        
-
+ $("#_copy").on('click', function () {
+   
+     copyContent("moneyaddress");
+ });
 
  }
 
 
+//_q1  fireds dooaddress _q2
 
 }
 
@@ -86095,13 +86108,16 @@ function timeStampToTime (timestamp) {
 
      });
  }
+           function copyContent(x) {
+             var Url=document.getElementById(x);
+             Url.select(); // 选择对象
+             document.execCommand("Copy"); // 执行浏览器复制命令
+             alert("复制成功");
+         }
 
   function updateSelInforHome() {
 
-          if (typeof App.infor.out_addr) {
-            
-             $('#dooaddress').val(App.infor.out_addr);
-           }
+     
 
           if (typeof App.infor.base_mon) {
 
@@ -86115,9 +86131,23 @@ function timeStampToTime (timestamp) {
             $('#home_mem_mon').text(Str_inof(App.infor.mem_mon,5)+"USDT");
             
            }
-            $("#moneyaddress").val(App.infor.base_addr);
-            $("#fireds").val(App.infor.mem_addr);
+           if (App.infor.mem_addr=="0x0000000000000000000000000000000000000000") {
+            $("#fireds").val("");
+           }
+           else {
+                $("#fireds").val(App.infor.mem_addr);
+           }
+            if (App.infor.out_addr=="0x0000000000000000000000000000000000000000") {
+             $('#dooaddress').val("");
+           }
+           else {
+                 $('#dooaddress').val(App.infor.out_addr);
+           }
+            $("#moneyaddress").val(App.accounts[0]);
+           
+           
             $("#home_levels").val(App.infor.classs);
+            
             $("#home_names").val(App.infor.name);
            }
 
