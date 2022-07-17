@@ -584,7 +584,9 @@ function timeStampToTime (timestamp) {
 
 
  function getInfor(){
+
   App.instance.methods.getSelfInfor().call(function (err,res) {
+    console.log("getInfor"+res);
            App.infor.base_addr=res[0];
             App.infor.out_addr=res[3];
              App.infor.mem_addr=res[4];
@@ -594,12 +596,13 @@ function timeStampToTime (timestamp) {
           App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
           App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
             App.infor.limiteTime=res[5];
-             App.infor.mem_mon.isExist=res[9];
+             App.infor.isExist=res[9];
      });
 
  }
  function firstGetInfor() {
     App.instance.methods.getSelfInfor().call(function (err,res) {
+       console.log("getInfor"+res);
            App.infor.base_addr=res[0];
             App.infor.out_addr=res[3];
              App.infor.mem_addr=res[4];
@@ -611,7 +614,7 @@ function timeStampToTime (timestamp) {
            App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
           App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
           App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
-           App.infor.mem_mon.isExist=res[9];
+           App.infor.isExist=res[9];
           updateSelInfor();
           UpdateLog();
      });
