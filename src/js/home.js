@@ -11,8 +11,8 @@ App={
   accounts:null,
   instance:{},
   fml_instance:{},
-  contract_Addr:'0xaD4d8cAbb9D2C6B495Fb5EeFeEf871dE356c0ee7',
-  contract_usdtd:'0xB8AfDC29EC2A48e253023384F2ee22874875448A',
+   contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
+  contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
   originalBlock:20964943,
   chainIdd:"0x61",
   infor:{},
@@ -38,9 +38,7 @@ App={
        App.fml_instance =  new web3.eth.Contract(data.abi,App.contract_usdtd,{from:App.accounts[0]});
       });
   }
-        $("#re").on('click', function () {
-          firstGetInfor();
-        });
+       
     return App.initBingEvent(); 
    
   }
@@ -98,6 +96,9 @@ App={
           
         }
        
+       });
+       $("#refrsh").on('click', function () {
+            firstGetInfor();
        });
 $("#ccc").on('click', function () {
     alert("ccc");

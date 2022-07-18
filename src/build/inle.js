@@ -86012,18 +86012,15 @@ App={
         App.chainIdd=  await ethereum.request({ method: 'eth_chainId'});
         web3=new Web3();
          web3.setProvider(App.web3Provider); 
-     
-
       $.getJSON('./artifacts/test.json',  function(data){
        App.instance = new web3.eth.Contract(data.abi,App.contract_Addr,{from:App.accounts[0]});
-      firstGetInfor();
-
+       UpdateLog();
       });
          $.getJSON('./artifacts/fml.json',  function(data){
        App.fml_instance =  new web3.eth.Contract(data.abi,App.contract_usdtd,{from:App.accounts[0]});
       });
   }
-       
+
     return App.initBingEvent(); 
    
   }
@@ -86033,89 +86030,65 @@ App={
 //chain_select 
  initBingEvent: function (){
 
-  //选择仓改变时 timeStampToTime(res[5])
 
-
-//transout 日志 刷新按钮 infor_notic
-     // 转出事件
+       async function  UpdateLog(){
+      let  tb= await web3.eth.getBlockNumber();
+      let mmm =tb-App.originalBlock;
+      if (mmm<4000) {
+      App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock, toBlock: 'latest'},function (error,result) {
+ return result;
+  })
+.then(x=>{
+   UpdateInLog(x);
+  });
+      }else {
+        let _mmm=Math.floor(mmm/4000);
+        for (let i = 0; i <=_mmm; i++) {
+          if (i==0) {
+       App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock, toBlock:App.originalBlock+4000},function (error,result) {
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+          }
+          else {
+            if (App.originalBlock+(i+1)*4000>=tb) {
+                   App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock+4000*i, toBlock: 'latest'},function (error,result) {
   
-
-       //添加一个刷新按钮
-        $('#refresh').on('click', async function () {
-       updateSelInfor();
-       getNotic();
-      
-      });
-       $("#reset").on('click',  function () {
-          
-        // 新判断是否存在
-        if ($('#rememberChec').is(':checked')) {
-
-            let sig1=$('#dooaddress').val();
-            let sig2=$("#fireds").val();
-            let sig3=$("#home_names").val();
-            if (sig1==sig2) {
-                alert("不能自己推荐自己！");
-                return;
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
             }
-            if (checkAddr.checkAdress(sig1).toLowerCase()!=sig1.toLowerCase() ||sig1.length!=42 ) {
-                alert("doo仓地址格式无效，请检查");
-                return;
-            };
-            if (checkAddr.checkAdress(sig2).toLowerCase()!=sig2.toLowerCase() ||sig2.length!=42) {
-                alert("推荐人仓地址格式无效，请检查");return;
-            };
-              App.instance.methods.members_addr(sig2).call(function (err,res) {
-                if (res) {
-              App.instance.methods.UpDateInfor(sig3,sig2,sig1).send({from:App.accounts[0]})
-           .on('receipt',function(receipt){
-                alert("修改信息成功！");
-          })
+            else {
+                   App.instance.getPastEvents ('inRecord',{filter: {"_from":App.accounts[0]}, fromBlock: App.originalBlock+i*4000, toBlock: App.originalBlock+(i+1)*4000},function (error,result) {
+  
+ return result;
+  }).then(x=>{
+   UpdateInLog(x);
+  });
+            }
 
-                }
-                else {
-                     alert("推荐人地址无效！");return;
-                }
-             });
+          }
 
-          
         }
+
+      }
+
+
+//-------------------
+  
+    
+  }
        
-       });
-       $("#refrsh").on('click', function () {
-            firstGetInfor();
-       });
-$("#ccc").on('click', function () {
-    alert("ccc");
-       console.log(App.instance);
-      App.instance.methods.members_addr("0x4E7aad93E6858f0dACf8d8951Dfea981E7F115AC").call(function  (err,res) {
-                console.log(res);
-               
-            });
-});;
- $("#_q1").on('click', function () {
-   
-    $("#fireds").val("");
- });
-  $("#_q2").on('click', function () {
-   
-     $("#dooaddress").val("");
- });
-   $("#_q3").on('click', function () {
-   
-     $("#home_names").val("");
- });
+
 
        
- $("#_copy").on('click', function () {
-   
-     copyContent("moneyaddress");
- });
 
  }
 
 
-//_q1  fireds dooaddress _q2
+
 
 }
 
