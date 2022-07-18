@@ -86031,6 +86031,7 @@ App={
  initBingEvent: function (){
 
  $("#refrsh").on('click', function () {
+   $('#tables_out').find('tr').remove();
     UpdateLog();
   });
 

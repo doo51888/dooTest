@@ -623,7 +623,6 @@ function timeStampToTime (timestamp) {
  }
 
   function updateSelInfor() {
-          if (typeof App.infor.out_addr) {
             if ( App.infor.isExist) {
              $('#doo_account1').text(addr_Trans(App.infor.out_addr));
              $('#doo_account2').text(addr_Trans(App.infor.out_addr));
@@ -640,37 +639,17 @@ function timeStampToTime (timestamp) {
             
            }
                   }else {
-               $('#doo_account1').text("注：请先创建doo账户！");
-               $('#doo_account1').css('color','red')
-                 $('#doo_account2').text("注：请先创建doo账户！");
-               $('#doo_account2').css('color','red')
+                     var a = document.createElement("a");
+                      var node = document.createTextNode("请先完善doo仓信息！");
+                       a.appendChild(node);
+                        a.setAttribute("href","home.html");
+                          a.setAttribute("style","color : #5c56e3;text-decoration : underline");
+                          $('#doo_account1').append(a);
+                          $('#doo_account2').append(a);
+
+               
            }
 
-           }else{
-                 $('#doo_account1').text("注：请先创建doo账户！");
-               $('#doo_account1').css('color','red')
-                 $('#doo_account2').text("注：请先创建doo账户！");
-               $('#doo_account2').css('color','red')
-           }
-
-            
-          
-          //  App.infor.base_addr=res[0];
-          //   App.infor.out_addr=res[3];
-          //    App.infor.mem_addr=res[4];
-          //     App.infor.name=res[1];
-          //      App.infor.classs=res[11];
-          //  App.infor.base_mon=web3.utils.fromWei(res[6],'ether');
-          // App.infor.porfit_mon=web3.utils.fromWei(res[7],'ether');
-          // App.infor.mem_mon=web3.utils.fromWei(res[8],'ether');
-            // $('#base_addr').text(addr_Trans(res[0]));
-            // $('#out_addr').val(addr_Trans(res[3]));
-            // $('#mem_addr').val(addr_Trans(res[4]));
-            // $('#name').val(res[1]);
-            // $('#classs').text(res[11]);
-            // $('#base_mon').text(web3.utils.fromWei(res[6],'ether'));
-            // $('#porfit_mon').text(web3.utils.fromWei(res[7],'ether'));
-            // $('#mem_mon').text(web3.utils.fromWei(res[8],'ether'));
     }
 
 

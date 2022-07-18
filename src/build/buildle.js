@@ -86553,17 +86553,38 @@ function timeStampToTime (timestamp) {
             
            }
                   }else {
-               $('#doo_account1').text("注：请先创建doo账户！");
-               $('#doo_account1').css('color','red')
-                 $('#doo_account2').text("注：请先创建doo账户！");
-               $('#doo_account2').css('color','red')
+                     var a = document.createElement("a");
+                      var node = document.createTextNode("请先完善doo仓信息！");
+                       a.appendChild(node);
+                        a.setAttribute("href","home.html");
+                          a.setAttribute("style","color : #5c56e3;text-decoration : underline");
+                          
+                         $('#doo_account1').append(a);
+                
+                      
+                          // $('#doo_account2').append(a);
+                           // $('#doo_account1').text(123);
+               // $('#doo_account1').text("注：请先创建doo账户！");
+               // $('#doo_account1').css('color','red')
+               //   $('#doo_account2').text("注：请先创建doo账户！");
+               // $('#doo_account2').css('color','red')
            }
 
            }else{
-                 $('#doo_account1').text("注：请先创建doo账户！");
-               $('#doo_account1').css('color','red')
-                 $('#doo_account2').text("注：请先创建doo账户！");
-               $('#doo_account2').css('color','red')
+             var a = document.createElement("a");
+                      var node = document.createTextNode("请先完善doo仓信息！");
+                       a.appendChild(node);
+                        a.setAttribute("href","home.html");
+                           a.setAttribute("style","color : #5c56e3;text-decoration : underline");
+                         
+                         $('#doo_account1').append(a);
+                          
+                          // $('#doo_account2').append(a);
+                          // $('#doo_account1').text(123);
+               //   $('#doo_account1').text("注：请先创建doo账户！");
+               // $('#doo_account1').css('color','red')
+               //   $('#doo_account2').text("注：请先创建doo账户！");
+               // $('#doo_account2').css('color','red')
            }
 
             

@@ -86029,11 +86029,8 @@ App={
 
 //chain_select 
  initBingEvent: function (){
-
-
-      
-
   $("#refrsh").on('click', function () {
+    $('#tables_in').find('tr').remove();
     UpdateLog();
   });
        
