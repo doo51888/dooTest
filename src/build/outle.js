@@ -86031,7 +86031,27 @@ App={
  initBingEvent: function (){
 
 
-       async function  UpdateLog(){
+      
+
+  $("#refrsh").on('click', function () {
+    UpdateLog();
+  });
+       
+
+ }
+
+
+
+
+}
+
+/**
+ * 
+ *  公共函数
+ **/ 
+// 获取当前余额
+ 
+ async function  UpdateLog(){
       let  tb= await web3.eth.getBlockNumber();
       let mmm =tb-App.originalBlock;
 
@@ -86076,24 +86096,6 @@ App={
     
   }
        
-
-
-       
-
- }
-
-
-
-
-}
-
-/**
- * 
- *  公共函数
- **/ 
-// 获取当前余额
- 
-
 
 
  function Str_inof(x,y) {
@@ -86230,7 +86232,64 @@ function timeStampToTime (timestamp) {
        function addr_Trans( str_in) {
        return str_in.slice(0,4)+"...."+str_in.slice(37,42);
        }
+function UpdateOutLog(x){
+ for (let i = 0; i < x.length; i++){
+if (!inArry(App.logArrOut,x[i].returnValues._time)){
 
+       App.logArrOut.push(x[i]);
+      var row= document.createElement('tr');
+        $('#tables_in').append(row);  // jq 没有appendChild
+         var c1= document.createElement('td');
+         var c2= document.createElement('td');
+         var c3= document.createElement('td');
+         var c4= document.createElement('td');
+         row.appendChild(c1);
+         row.appendChild(c2);
+         row.appendChild(c3);
+         row.appendChild(c4);
+         c1.innerText =timeStampToTime(x[i].returnValues._time) ;
+ c3.innerText = web3.utils.fromWei(x[i].returnValues._value,'ether')+"USDT";
+         if (x[i].returnValues._type==1) {
+            c2.innerText ="+:基本仓";
+         }
+         else if (x[i].returnValues._type==2) {
+           c2.innerText ="+:基本仓";
+         }
+           else if (x[i].returnValues._type==3) {
+           c2.innerText ="+:利润仓(3)";//管理员划拨
+         }
+           else if (x[i].returnValues._type==4) {
+            c2.innerText ="+:推荐仓(4)";//管理员划拨
+         }
+           else if (x[i].returnValues._type==5) {
+            c2.innerText ="-:基本仓";
+         }
+          else if (x[i].returnValues._type==6) {
+            c2.innerText ="-:利润仓";
+         }
+         else if (x[i].returnValues._type==7) {
+           c2.innerText ="-:推荐仓";
+         }
+         else if (x[i].returnValues._type==8) {
+           c2.innerText ="+:基本仓(8)"; //管理员划拨
+         }
+          else if (x[i].returnValues._type==13) {
+           c2.innerText ="+:推荐仓(13)";// 推荐返
+         }
+         else if (x[i].returnValues._type==14) {
+           c2.innerText ="+:推荐仓(14)"; // 推荐返
+         }
+         else if (x[i].returnValues._type==15) {
+           c2.innerText ="+:推荐仓(15)"; //充值返
+
+         }
+        c4.innerText =web3.utils.fromWei(x[i].returnValues.total_account,'ether')+"USDT";
+      
+
+}
+ }
+
+   }
   $(function() {
   $(window).load(function() {
     App.ininWebs();

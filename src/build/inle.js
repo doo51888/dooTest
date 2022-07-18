@@ -86030,7 +86030,28 @@ App={
 //chain_select 
  initBingEvent: function (){
 
+ $("#refrsh").on('click', function () {
+    UpdateLog();
+  });
 
+       
+
+
+       
+
+ }
+
+
+
+
+}
+
+/**
+ * 
+ *  公共函数
+ **/ 
+// 获取当前余额
+ 
        async function  UpdateLog(){
       let  tb= await web3.eth.getBlockNumber();
       let mmm =tb-App.originalBlock;
@@ -86080,25 +86101,6 @@ App={
   
     
   }
-       
-
-
-       
-
- }
-
-
-
-
-}
-
-/**
- * 
- *  公共函数
- **/ 
-// 获取当前余额
- 
-
 
 
  function Str_inof(x,y) {
@@ -86235,6 +86237,33 @@ function timeStampToTime (timestamp) {
        function addr_Trans( str_in) {
        return str_in.slice(0,4)+"...."+str_in.slice(37,42);
        }
+          function UpdateInLog(x) {
+       for ( let i= 0; i < x.length; i++){
+       if (!inArry(App.logArrIn,x[i].returnValues._time)){
+      App.logArrIn.push(x[i]);
+      var row= document.createElement('tr');
+        $('#tables_out').append(row);  // jq 没有appendChild
+         var c1= document.createElement('td');
+         var c2= document.createElement('td');
+         var c3= document.createElement('td');
+         var c4= document.createElement('td');
+         row.appendChild(c1);
+         row.appendChild(c2);
+         row.appendChild(c3);
+         row.appendChild(c4);
+         c1.innerText = timeStampToTime(x[i].returnValues._time) ;
+         c2.innerText ="-"+ web3.utils.fromWei(x[i].returnValues._value,'ether')+"USDT";
+         c3.innerText =web3.utils.fromWei(x[i].returnValues.total_account,'ether')+"USDT";
+
+         if (x[i].returnValues.total_account==0) {
+           c4.innerText =0;
+         }else {
+            c4.innerText = timeStampToTime(x[i].returnValues._limit_time);
+         }
+        
+}
+ }
+   }
 
   $(function() {
   $(window).load(function() {
