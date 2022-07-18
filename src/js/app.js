@@ -645,7 +645,14 @@ function timeStampToTime (timestamp) {
                         a.setAttribute("href","home.html");
                           a.setAttribute("style","color : #5c56e3;text-decoration : underline");
                           $('#doo_account1').append(a);
-                          $('#doo_account2').append(a);
+
+                          var b = document.createElement("a");
+                      var node = document.createTextNode("请先完善doo仓信息！");
+                       b.appendChild(node);
+                        b.setAttribute("href","home.html");
+                          b.setAttribute("style","color : #5c56e3;text-decoration : underline");
+                     
+                          $('#doo_account2').append(b);
 
                
            }
