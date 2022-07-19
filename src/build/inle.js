@@ -85924,7 +85924,11 @@ App={
   accounts:null,
   instance:{},
   fml_instance:{},
+<<<<<<< HEAD
    contract_Addr:'0x024134c408a573289382FD296d2057015a151252',
+=======
+   contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
   contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
   originalBlock:20964943,
   chainIdd:"0x61",

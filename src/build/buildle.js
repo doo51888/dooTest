@@ -85922,6 +85922,7 @@ App={
   accounts:null,
   instance:{},
   fml_instance:{},
+<<<<<<< HEAD
   main_number:"$"+"正在同步数据...",
   // contract_Addr:'0xaD4d8cAbb9D2C6B495Fb5EeFeEf871dE356c0ee7',
   // contract_usdtd:'0xB8AfDC29EC2A48e253023384F2ee22874875448A',
@@ -85930,6 +85931,12 @@ App={
     contract_Addr:'0x024134c408a573289382FD296d2057015a151252',
   contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
   
+=======
+  // contract_Addr:'0xaD4d8cAbb9D2C6B495Fb5EeFeEf871dE356c0ee7',
+  // contract_usdtd:'0xB8AfDC29EC2A48e253023384F2ee22874875448A',
+  contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
+  contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
   originalBlock:20964943,
   chainIdd:"0x61",
   infor:{},
@@ -85990,6 +85997,7 @@ App={
       get_mon();
       get_approve_edu();
       getNotic();
+<<<<<<< HEAD
       // 获取仓量
       App.instance.methods._mainNuber().call(function(err,res){
 
@@ -85998,6 +86006,8 @@ App={
           });
 
  
+=======
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
       });
          $.getJSON('./artifacts/fml.json',  function(data){
        App.fml_instance =  new web3.eth.Contract(data.abi,App.contract_usdtd,{from:App.accounts[0]});
@@ -86046,6 +86056,7 @@ App={
           
         }
        
+<<<<<<< HEAD
  
 
           
@@ -86059,6 +86070,23 @@ App={
           });
           getNotic();
        },60000)
+=======
+         App.instance.methods.balanceOfFromFML(_get).call(function (err,res) {
+           $('#balance').text(web3.utils.fromWei(res,'ether'));
+          });
+         App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
+          $("#usdt_cu").text(web3.utils.fromWei(res,'ether'));
+
+          });
+         //approve_edu 剩余授权额度
+            App.fml_instance.methods.allowance(_get,App.contract_Addr).call(function (err,res) {
+
+             $("#approve_edu").text( web3.utils.fromWei(res));
+            })
+
+          
+     });
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
 
 //transout 日志 刷新按钮 infor_notic
      // 转出事件
@@ -86073,11 +86101,14 @@ App={
           .on('receipt',function(receipt){
           firstGetInfor();
           UpdateLog();
+<<<<<<< HEAD
                App.instance.methods._mainNuber().call(function(err,res){
 
             App.main_number="$"+toLocaleString(res);
              $("#mainNumber").text( App.main_number);
           });
+=======
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
             }) 
 
          }else {
@@ -86134,11 +86165,14 @@ App={
            get_approve_edu();
            updateSelInfor();
            UpdateLog();
+<<<<<<< HEAD
                 App.instance.methods._mainNuber().call(function(err,res){
 
             App.main_number="$"+toLocaleString(res);
              $("#mainNumber").text( App.main_number);
           });
+=======
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
            //更新基本仓
        
           })
@@ -86328,6 +86362,7 @@ function get_mon () {
           }); 
 }
 
+<<<<<<< HEAD
 
 //获取授权额度
 function get_approve_edu() {
@@ -86338,6 +86373,15 @@ function get_approve_edu() {
             })
   }
 
+=======
+//获取授权额度
+function get_approve_edu() {
+   App.fml_instance.methods.allowance(App.accounts[0],App.contract_Addr).call(function (err,res) {
+
+             App.infor.approv=web3.utils.fromWei(res,'ether');
+             $("#approve_edu").text( Str_inof(web3.utils.fromWei(res,'ether'),5)+"USDT");
+            })
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
 }
 
 
@@ -86594,6 +86638,7 @@ function timeStampToTime (timestamp) {
            }
 
     }
+<<<<<<< HEAD
        function toLocaleString(num) {
             // 将数字转换成字符串，并分割成数组
             // 注意：用split方法时，里面必须加双引号，才会逐个字符分割,再反转数组
@@ -86612,6 +86657,9 @@ function timeStampToTime (timestamp) {
             // 返回这个字符串
             return str
         }
+=======
+
+>>>>>>> b7e6eb16bf37f11e9e7679160e03958271f5b56d
 
 function getBalanceOfMainOnly () {
          App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
