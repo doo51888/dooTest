@@ -11,7 +11,7 @@ App={
   accounts:null,
   instance:{},
   fml_instance:{},
-   contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
+   contract_Addr:'0x024134c408a573289382FD296d2057015a151252',
   contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
   originalBlock:20964943,
   chainIdd:"0x61",
