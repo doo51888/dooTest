@@ -85922,7 +85922,7 @@ App={
   accounts:null,
   instance:{},
   fml_instance:{},
-  main_number:"$"+"正在同步数据...",
+  main_number:"$"+"...",
   // contract_Addr:'0xaD4d8cAbb9D2C6B495Fb5EeFeEf871dE356c0ee7',
   // contract_usdtd:'0xB8AfDC29EC2A48e253023384F2ee22874875448A',
   // contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
@@ -85943,7 +85943,7 @@ App={
         App.accounts=  await ethereum.request({ method: 'eth_requestAccounts' });
         let chainIds=  await ethereum.request({ method: 'eth_chainId'});
      $("#chain").text(chainIds);
-     $("#mon_main").text(addr_Trans(App.accounts[0]));
+     $("#mon_main").val(addr_Trans(App.accounts[0]));
      
        ethereum.on('chainChanged',(chainID)=>{
        App.chainIdd=chainID;
@@ -85991,11 +85991,7 @@ App={
       get_approve_edu();
       getNotic();
       // 获取仓量
-      App.instance.methods._mainNuber().call(function(err,res){
-
-            App.main_number="$"+toLocaleString(res);
-             $("#mainNumber").text( App.main_number);
-          });
+      getMainNumber();
 
  
       });
@@ -86051,12 +86047,8 @@ App={
           
      });
        window.setInterval(()=>{
-         $("#mainNumber").text( App.main_number);
-          App.instance.methods._mainNuber().call(function(err,res){
-
-            App.main_number="$"+toLocaleString(res);
-             $("#mainNumber").text( App.main_number);
-          });
+         $("#mainNumber").text(App.main_number);
+          getMainNumber();
           getNotic();
        },60000)
 
@@ -86073,11 +86065,7 @@ App={
           .on('receipt',function(receipt){
           firstGetInfor();
           UpdateLog();
-               App.instance.methods._mainNuber().call(function(err,res){
-
-            App.main_number="$"+toLocaleString(res);
-             $("#mainNumber").text( App.main_number);
-          });
+        getMainNumber();
             }) 
 
          }else {
@@ -86119,6 +86107,8 @@ App={
        
         
       });
+
+
       //transin 转入事件
        $("#transin").on('click',  function () {
         let mn= $('#sel4 option:selected').val();
@@ -86127,18 +86117,14 @@ App={
               return;
             }
             else {
-              if (App.infor.approv>mn) {
+              if (App.infor.approv>=mn) {
                  App.instance.methods.transferInFromFML(mn+"000000000000000000").send({from:App.accounts[0]})
           .on('receipt',function(receipt){
+               get_approve_edu();
                get_mon();
-           get_approve_edu();
-           updateSelInfor();
-           UpdateLog();
-                App.instance.methods._mainNuber().call(function(err,res){
-
-            App.main_number="$"+toLocaleString(res);
-             $("#mainNumber").text( App.main_number);
-          });
+               firstGetInfor();
+               UpdateLog();
+               getMainNumber();
            //更新基本仓
        
           })
@@ -86158,8 +86144,15 @@ App={
         
       });
         $("#_copy").on('click', function () {
-   
-     copyContent();
+         $("#mon_main").val(App.accounts[0]);
+         copyContent("mon_main");
+          $("#mon_main").val(addr_Trans(App.accounts[0]));
+       });
+        
+          $("#_copy2").on('click', function () {
+              $("#doo_account2").val(App.infor.out_addr);
+         copyContent("doo_account2");
+           $("#doo_account2").val(addr_Trans(App.infor.out_addr));
        });
 
        //添加一个刷新按钮
@@ -86170,7 +86163,7 @@ App={
       });
       $("#dropdownMenuButton1").on('click',  function () {
          App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
-           $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),5) +"USDT");
+           $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),8) +"USDT");
           });
 
 
@@ -86208,7 +86201,8 @@ App={
          $("#img01").attr("src",mn);
          $("#dropdownMenuButton1").text($(this).text());
          //addr_Trans
-          $("#mon_main").text(addr_Trans(App.accounts[0]));
+          $("#mon_main").val(addr_Trans(App.accounts[0]));
+            
            get_mon();
            get_approve_edu();
     });
@@ -86226,11 +86220,18 @@ App={
  * 
  *  公共函数
  **/ 
-    function copyContent() {
+
+ function getMainNumber() {
+           App.instance.methods._mainNuber().call(function(err,res){
+            App.main_number="$"+toLocaleString(web3.utils.fromWei(res,'ether'));
+             $("#mainNumber").text(App.main_number);
+          });
+ }
+    function copyContent(x) {
              var Url=document.getElementById(x);
              Url.select(); // 选择对象
              document.execCommand("Copy"); // 执行浏览器复制命令
-             alert("复制成功");
+             alert("复制地址成功！");
      }
 
 // 获取当前余额
@@ -86324,7 +86325,7 @@ App={
 
 function get_mon () {
  App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
-           $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),5) +"USDT");
+           $('#balance').text(Str_inof(web3.utils.fromWei(res,'ether'),8) +"USDT");
           }); 
 }
 
@@ -86334,7 +86335,7 @@ function get_approve_edu() {
   if (typeof App.fml_instance) {
       App.fml_instance.methods.allowance(App.accounts[0],App.contract_Addr).call(function (err,res) {
              App.infor.approv=web3.utils.fromWei(res,'ether');
-             $("#approve_edu").text( Str_inof(web3.utils.fromWei(res,'ether'),5)+"USDT");
+             $("#approve_edu").text( Str_inof(web3.utils.fromWei(res,'ether'),7)+"USDT");
             })
   }
 
@@ -86561,17 +86562,18 @@ function timeStampToTime (timestamp) {
   function updateSelInfor() {
             if ( App.infor.isExist) {
              $('#doo_account1').text(addr_Trans(App.infor.out_addr));
-             $('#doo_account2').text(addr_Trans(App.infor.out_addr));
+             $('#doo_account2').val(addr_Trans(App.infor.out_addr));
+
           if (typeof App.infor.base_mon) {
 
-            $('#base_mon').text(Str_inof(App.infor.base_mon,5)+"USDT");
+            $('#base_mon').text(Str_inof(App.infor.base_mon,8)+"USDT");
            }
             if (typeof App.infor.porfit_mon) {
 
-            $('#porfit_mon').text(Str_inof(App.infor.porfit_mon,5)+"USDT");
+            $('#porfit_mon').text(Str_inof(App.infor.porfit_mon,8)+"USDT");
            }
             if (typeof App.infor.mem_mon) {
-            $('#mem_mon').text(Str_inof(App.infor.mem_mon,5)+"USDT");
+            $('#mem_mon').text(Str_inof(App.infor.mem_mon,8)+"USDT");
             
            }
                   }else {
@@ -86581,14 +86583,8 @@ function timeStampToTime (timestamp) {
                         a.setAttribute("href","home.html");
                           a.setAttribute("style","color : #5c56e3;text-decoration : underline");
                           $('#doo_account1').append(a);
+                          $('#doo_account2').val("ox0[无效地址]");
 
-                          var b = document.createElement("a");
-                      var node = document.createTextNode("请先完善doo仓信息！");
-                       b.appendChild(node);
-                        b.setAttribute("href","home.html");
-                          b.setAttribute("style","color : #5c56e3;text-decoration : underline");
-                     
-                          $('#doo_account2').append(b);
 
                
            }
