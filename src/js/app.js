@@ -9,10 +9,14 @@ App={
   accounts:null,
   instance:{},
   fml_instance:{},
+  main_number:"$"+"正在同步数据...",
   // contract_Addr:'0xaD4d8cAbb9D2C6B495Fb5EeFeEf871dE356c0ee7',
   // contract_usdtd:'0xB8AfDC29EC2A48e253023384F2ee22874875448A',
-  contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
+  // contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
+  // contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
+    contract_Addr:'0x024134c408a573289382FD296d2057015a151252',
   contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
+  
   originalBlock:20964943,
   chainIdd:"0x61",
   infor:{},
@@ -73,6 +77,14 @@ App={
       get_mon();
       get_approve_edu();
       getNotic();
+      // 获取仓量
+      App.instance.methods._mainNuber().call(function(err,res){
+
+            App.main_number="$"+toLocaleString(res);
+             $("#mainNumber").text( App.main_number);
+          });
+
+ 
       });
          $.getJSON('./artifacts/fml.json',  function(data){
        App.fml_instance =  new web3.eth.Contract(data.abi,App.contract_usdtd,{from:App.accounts[0]});
@@ -121,21 +133,19 @@ App={
           
         }
        
-         App.instance.methods.balanceOfFromFML(_get).call(function (err,res) {
-           $('#balance').text(web3.utils.fromWei(res,'ether'));
-          });
-         App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {
-          $("#usdt_cu").text(web3.utils.fromWei(res,'ether'));
-
-          });
-         //approve_edu 剩余授权额度
-            App.fml_instance.methods.allowance(_get,App.contract_Addr).call(function (err,res) {
-
-             $("#approve_edu").text( web3.utils.fromWei(res));
-            })
+ 
 
           
      });
+       window.setInterval(()=>{
+         $("#mainNumber").text( App.main_number);
+          App.instance.methods._mainNuber().call(function(err,res){
+
+            App.main_number="$"+toLocaleString(res);
+             $("#mainNumber").text( App.main_number);
+          });
+          getNotic();
+       },60000)
 
 //transout 日志 刷新按钮 infor_notic
      // 转出事件
@@ -150,6 +160,11 @@ App={
           .on('receipt',function(receipt){
           firstGetInfor();
           UpdateLog();
+               App.instance.methods._mainNuber().call(function(err,res){
+
+            App.main_number="$"+toLocaleString(res);
+             $("#mainNumber").text( App.main_number);
+          });
             }) 
 
          }else {
@@ -206,6 +221,11 @@ App={
            get_approve_edu();
            updateSelInfor();
            UpdateLog();
+                App.instance.methods._mainNuber().call(function(err,res){
+
+            App.main_number="$"+toLocaleString(res);
+             $("#mainNumber").text( App.main_number);
+          });
            //更新基本仓
        
           })
@@ -395,13 +415,16 @@ function get_mon () {
           }); 
 }
 
+
 //获取授权额度
 function get_approve_edu() {
-   App.fml_instance.methods.allowance(App.accounts[0],App.contract_Addr).call(function (err,res) {
-
+  if (typeof App.fml_instance) {
+      App.fml_instance.methods.allowance(App.accounts[0],App.contract_Addr).call(function (err,res) {
              App.infor.approv=web3.utils.fromWei(res,'ether');
              $("#approve_edu").text( Str_inof(web3.utils.fromWei(res,'ether'),5)+"USDT");
             })
+  }
+
 }
 
 
@@ -658,7 +681,24 @@ function timeStampToTime (timestamp) {
            }
 
     }
-
+       function toLocaleString(num) {
+            // 将数字转换成字符串，并分割成数组
+            // 注意：用split方法时，里面必须加双引号，才会逐个字符分割,再反转数组
+            const arr = num.toString().split('').reverse()
+            // 遍历数组
+            for (let i = 0; i < arr.length; i++) {
+                // 如果索引被3整除，并且索引不为0
+                if (i % 3 === 0 && i !== 0) {
+                    // 在当前字符前面加一个逗号
+                    arr[i] = arr[i] + ','
+                }
+            }
+            // 遍历完后，先反转数组，再将数组转换为字符串
+            // 注意：用join方法时，里面必须加双引号，不然默认会用逗号分割
+            const str = arr.reverse().join('')
+            // 返回这个字符串
+            return str
+        }
 
 function getBalanceOfMainOnly () {
          App.instance.methods.balanceOfFromFML(App.accounts[0]).call(function (err,res) {

@@ -1,6 +1,6 @@
 Web3 = require('web3');
 fs= require('fs');
-checkAddr=require('./checkAdres.js');
+
 // ckAd=require('./checkAddress.js');
 App={
 
@@ -73,11 +73,11 @@ App={
                 alert("不能自己推荐自己！");
                 return;
             }
-            if (checkAddr.checkAdress(sig1).toLowerCase()!=sig1.toLowerCase() ||sig1.length!=42 ) {
+            if (sig1.length!=42 ) {
                 alert("doo仓地址格式无效，请检查");
                 return;
             };
-            if (checkAddr.checkAdress(sig2).toLowerCase()!=sig2.toLowerCase() ||sig2.length!=42) {
+            if (sig2.length!=42) {
                 alert("推荐人仓地址格式无效，请检查");return;
             };
               App.instance.methods.members_addr(sig2).call(function (err,res) {
