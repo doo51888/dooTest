@@ -75,15 +75,16 @@
 
 <!-- 导航栏 -->
 
-<ul style="display:inline-block">
+<ul style="display:inline-block;float: left;">
     <li style="list-style-type:none; margin-left: -10px;">
-<img src="./images/logo2.jpg" class="img-responsive" alt="Cinque Terre" style="width: 26px; height: 22px; display:inline-block;">
+    <img src="./images/logo2.jpg" class="img-responsive" alt="Cinque Terre" style="width: 28px; height: 26px; display:inline-block;">
       <a  href="#" ></a>
     </li>
     </ul>
     <!-- ================================================================================================== -->
     <!-- 侧边栏 -->
-    <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="float: right;"><img src="./images/cebianlan.png" style="width: 28px; height=24px;"></button>
+    <!-- <img src="./images/cebianlan.png" style="width: 28px; height=24px;"> -->
+    <button  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="float: right;border:none;margin: 0px;padding: 0px;background: none;"> <i class="bi bi-list-ul" style="font-size: x-large;padding-right: 8px;"></i></button>
  
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 56%;">
   <div class="offcanvas-header">
@@ -107,20 +108,18 @@
 <li style="margin-bottom: 6px;"><i class="bi bi-patch-minus-fill" style="color:#5c56e3 ;font-size: large;padding-right: 10px;vertical-align:middle;"></i><a href="out.html" style="text-decoration: none;color: black;font-weight: 500;vertical-align:middle;">转出明细</a></li>
 
 
-<li style="margin-top: 190%;"><i class="bi bi-question-diamond-fill" style="color:#dadcdc ;font-size: large;padding-right: 10px;vertical-align:middle;"></i><a href="" style="text-decoration: none;color: black;font-weight: 500;vertical-align:middle;">帮助中心</a></li>
+<li style="margin-top: 190%;"><i class="bi bi-question-diamond-fill" style="color:#dadcdc ;font-size: large;padding-right: 10px;vertical-align:middle;"></i><a href="help.html" style="text-decoration: none;color: black;font-weight: 500;vertical-align:middle;">帮助中心</a></li>
 
 <li style="color:#dadcdc ;">______________________________________</li>
 <li style="color:#dadcdc ;font-size:x-small;float: right;padding-right: 6px;padding-top: 6px;">V1.0</li>
 </ul>
-  
-  
    
   </div>
 </div>
 <!-- ================================================================================================== -->
   <!-- 背景 -->
   
-    <div class="container-full" id="beijing" style=" background-image: linear-gradient(to right, #3d3a7a, #131941, #2f2c6a); width: 100%; height: 800px;float:left; ">
+    <div class="container-full" id="beijing" style=" background-image: linear-gradient(to right, #3d3a7a, #131941, #2f2c6a); width: 100%; height: 770px;float:left; ">
 
 
     <!-- div 中添加 .alert-dismissible 类，然后在关闭按钮的链接上添加 class="btn-close" 和 data-dismiss="alert" 类来设置提示框的关闭操作 -->
@@ -130,23 +129,23 @@
     <a href="" title=""class="alert-link" style="text-decoration:none;color: white; " id="_notic">..</a>
   </div>
   <!-- =================================================================================================== -->
-    <div style="margin-top: 30%;text-align: center; ">
+    <div style="margin-top: 120px;text-align: center; ">
     <h5 style="color: white; text-align: center;">doo仓usdt总量</h5>
-    <ul style="width: 100%;font-weight:bold;">
-      <li >
-  <a href="#" style="font-family:微软雅黑;font-size:xx-large;color: white;text-decoration:none;" id="mainNumber">$正在同步数据...</a>
-   </li>
-    </ul>
+  
+  <a href="#" style="font-family:微软雅黑;font-size:xx-large;color: white;text-decoration:none;text-align: center;font-weight:bold;" id="mainNumber">$正在同步数据...</a>
+ 
 
     <!-- ===================================================================================================== -->
 
     <!-- 选项卡 -->
-    <div class="container ">
-  <ul class="nav " style="margin-right: 5%;font-size:large; ">
-    <li class=" dianji" style="padding-left: 24%;">
+    <div class="container " style="">
+  <ul class="nav " style="font-size:large;text-align: center; ">
+   
+    <li class=" dianji" style="padding-left: 26%;">
       <a class="nav-link active" data-bs-toggle="tab" href="#home" style="color: white;font-weight:bold">转入</a>
     </li>
-    <li class="dianji" style="padding-left: 10%">
+    
+    <li class="dianji" style="padding-left: 12%">
       <a class="nav-link" data-bs-toggle="tab" href="#menu1" style="color: white;font-weight:bold">转出</a>
     </li>
   </ul>
@@ -263,23 +262,23 @@
 
       
  
-     <h5 style="float: left;  margin-top: 10px;color: #919292;margin-left: 12px;"> doo仓账户</h5>
+     <h5 style="float: left; color: #919292;margin-left: 12px;"> doo仓账户</h5>
      
-     <p style=" color: #919292;margin-top: 26px;float: left;margin-left: -60px;font-weight: bold;" id="doo_account1"></p>
+     <p style=" color: #919292;margin-top: 24px;float: left;margin-left: -60px;font-weight: bold;" id="doo_account1"></p>
      
 
-      <a href="home.html" style=" color: #5c56e3;font-size: small;float: right;margin-top: 10px;font-weight: bold;margin-right: 16px;">+高级设置</a>
+      <a href="home.html" style=" color: #5c56e3;font-size: small;float: right;font-weight: bold;margin-right: 16px;">+高级设置</a>
 
      <!-- 弹窗 -->
-     <div style="float: left;width: 100%;">
+     <div style="float: left;width: 100%;margin-top: 6px;">
 <!-- ******************* -->
       <!-- 模态框 -->
 <div class="container" style="">
   
   <!-- 按钮：用于打开模态框  getlog_in-->
-  <br>
-
-   <button type="button" id="getlog_in" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: -86%;appearance:none;background:none;color: #5c56e3;font-weight: bold;border: none;text-decoration:underline;outline: none;">
+  
+<!-- class="btn btn-primary"这个属性控制的是button 按钮点击过程中产生的篮框 -->
+   <button type="button" id="getlog_in"  data-toggle="modal" data-target="#myModal" style="margin-left: -86%;appearance:none;background:none;color: #5c56e3;font-weight: bold;border: none;text-decoration:underline;outline: none;">
      转入明细
   </button>
   <!-- 模态框 -->
@@ -289,7 +288,7 @@
    
         <!-- 模态框头部 -->
         <div >
-         
+          <a href="in.html" style="float: left; color: gray;padding-left: 10px;font-weight: bold;padding-top: 6px;font-size: x-small;text-decoration: none;">更多>>></a>
           <button type="button" class="close" data-dismiss="modal" style="margin-right: 2%;margin-top: 2%">&times;</button>
         </div>
    
@@ -344,7 +343,7 @@
     <div style="width: 36%;height: 120PX;background-color: #fafafc;float: left;color: #f4f4f5;margin-left: 8px;margin-top: 10px;">
     <div style=" margin-top: 40px;line-height: 24px;color:#919292 ;text-align: center;">
     <h5 style="text-align: center;">doo仓账户<i class="bi bi-back"  id="_copy2"></i></h5>
-    <input type="text" name="" style="border: none; background: none;outline:none;text-align: center;"  readonly value="请从钱包打开！" id="doo_account2">
+    <input type="text" name="" style="border: none; background: none;outline:none;text-align: center;"  readonly  id="doo_account2">
 
    </div>
     </div><!-- ----------------左框---end-------------------- -->
@@ -428,18 +427,18 @@
 <!-- 第四部分 -->
 <div style="width: 100%;height: 80px;">
   <!-- 弹窗 -->
+  
   <br>
-  <br>
-     <div style="float: left;width: 100%;">
+     <div style="float: left;width: 100%;padding-left: 14px;">
 <!-- ******************* -->
       <!-- 模态框 -->
 <div class="container" style="">
   
   <!-- 按钮：用于打开模态框 -->
   <br>
-
-   <button type="button" id="getlog_out" class="btn btn-primary" data-toggle="modal" data-target="#myModa2" style="margin-left: -86%;appearance:none;background:none;color: #5c56e3;font-weight: bold;border: none;text-decoration:underline;outline: none;">
-     转入明细
+<!-- class="btn btn-primary"这个属性控制的是button按钮的点击产生的篮框 -->
+   <button type="button" id="getlog_out"  data-toggle="modal" data-target="#myModa2" style="margin-left: -86%;appearance:none;background:none;color: #5c56e3;font-weight: bold;border: none;text-decoration:underline;outline: none;">
+     转出明细
   </button>
   <!-- 模态框 -->
   <div class="modal fade" id="myModa2">
@@ -448,7 +447,7 @@
    
         <!-- 模态框头部 -->
         <div >
-         
+         <a href="out.html" style="float: left; color: gray;padding-left: 10px;font-weight: bold;padding-top: 6px;font-size: x-small;text-decoration: none;">更多>>></a>
           <button type="button" class="close" data-dismiss="modal" style="margin-right: 2%;margin-top: 2%">&times;</button>
         </div>
    
