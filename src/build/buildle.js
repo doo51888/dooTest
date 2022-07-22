@@ -85947,12 +85947,12 @@ App={
        App.chainIdd=chainID;
       $("#chain").text(chainID);
 
-   if (chainID!='0x38'){
+   if (chainID!='0x61'){
      
      try {
           ethereum.request({
      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x38' }],
+      params: [{ chainId: '0x61' }],
 
      });
      window.location.reload();
@@ -85963,7 +85963,7 @@ App={
             method: 'wallet_addEthereumChain',
             params: [
           {
-            chainId: '0x38',
+            chainId: '0x61',
             chainName: 'BSC',
             rpcUrls: ['https://bsc-dataseed.binance.org/'] ,
           },
