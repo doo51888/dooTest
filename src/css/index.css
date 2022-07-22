@@ -1,0 +1,19 @@
+*{
+	margin:0;
+	padding:0;
+
+}
+
+.btn:focus{
+	outline:none;
+	color: red;
+}
+li{
+	list-style-type:none;
+
+}
+a{
+	text-decoration:none;
+	
+
+}

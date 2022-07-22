@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--     <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script> -->
+	<title>doo|home</title>
+<!-- 	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css"> -->
+
+		<link rel="stylesheet" href="./css/index.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+	   <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+	   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>  
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+	<script type="text/javascript" src="./build/homele.js"></script>
+</head>
+<body style="margin: 0;padding: 0; width: 100%;height: 920px;">
+
+<!-- -----------------------个人中心开始--------------------------------------->
+
+<div class="container-full" style="width: 100%;height:100%;background-color:#f2f6fe;"><!-- ---------背景----------- -->
+
+<div style="width: 100%;height: 28px;background-color: #574f88;margin-bottom: 20px;line-height: 28px;">
+	<!-- 返回首页 -->
+   <ul style="list-style-type: none;margin-left: -16px;">
+    <li style="list-style-type:none;float: left;">
+	<a href="index.html" style="text-decoration: none;"><i class="bi bi-arrow-left" style="color:white;font-size: x-large;padding-left: 8px;"></i></a>
+   </li>
+	<li  id="refrsh" style="float: right;"><a href=""><i class="bi bi-arrow-repeat" style="color: white;font-size: x-large;padding-right: 8px;font-weight: bold;"></i></a></li>
+    </ul>
+ </div>
+<!-- ----------------------------- -->
+
+
+
+
+	<!-- --------------中间背景------------------- -->
+	<div class="container ">
+		
+		<div  class="container tab-pane " style="width: 100%;height:650px;background: #f0ebfb;border-radius:30px;"><br>
+          <!-- 第一部分 -->     
+
+<!-- ----------------------表单------------------------ -->
+<div class="container mt-3" style="height: 380px;width: 100%;background: #ffffff;border-radius:15px;font-size: small;">
+	<br>
+  <h5 style="vertical-align:middle;"><i class="bi bi-file-earmark-person-fill" style="color: #5c56e3;font-size: x-large;vertical-align:middle;padding-right: 4px;"></i>基本信息</h5>
+
+
+
+	  <div class="mb-3 mt-3">
+		<label for="names" class="form-label">doo昵称:</label>
+		<input type="names"  id="home_names"  maxlength="10" placeholder="请输入昵称" name="names" required style="background:none;outline:none;border:none;background-color: #f2f6fe;height: 30px;padding-left: 6px;width: 70%;" required onKeyUp="value=value.replace(/[\W]/g,'')" >
+		<i class="bi bi-pencil-square" style="color: #919292;" id="_q3"></i>
+	  </div>
+
+<div class="mb-3 mt-3">
+		<label for="levels" class="form-label">doo星级:</label>
+		<input type="levels"  id="home_levels" placeholder="*****" name="levels" readonly style="background:none;outline:none;border:none;background-color: #f6f8fc;height: 30px;padding-left: 6px;width: 70%;">
+	  </div>
+
+	  <div class="mb-3">
+		<label for="fireds" class="form-label">推荐地址:</label>
+		<input type="fireds"  id="fireds" placeholder="请输入推荐钱包地址" name="fireds" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;" required>
+		<i class="bi bi-pencil-square" style="color: #919292;" id="_q1" onKeyUp="value=value.replace(/[\W]/g,'')" ></i>
+		<p style="color: red;font-size: x-small;">注：只可绑定一次，以后无法修改！！！</p>
+	  </div>
+	  <div class="mb-3"> 
+		<label for="dooaddress" class="form-label">doo地址:</label>
+		<input type="dooaddress"  id="dooaddress" placeholder="请输入doo仓地址" name="dooaddress" required style="background:none;outline:none;border:none;background-color:#f2f6fe ;height: 30px;padding-left: 6px;width: 70%;" onKeyUp="value=value.replace(/[\W]/g,'')" required>
+		<i class="bi bi-pencil-square" style="color: #919292;" id="_q2"></i>
+		<p style="color: red;font-size: x-small;">注：默认钱包地址，可修改！！！</p>
+	  </div>
+      <div class="mb-3">
+		<label for="moneyaddress" class="form-label">钱包地址:</label>
+		<input type="moneyaddress"  id="moneyaddress" placeholder="默认当前钱包地址" name="moneyaddress"  readonly   style="background:none;outline:none;border:none;background-color:#f6f8fc ;height: 30px;padding-left: 6px;width: 70%;">
+		<i class="bi bi-back" style="color: #919292;" id="_copy"></i>
+	  </div>
+
+	  <div class="form-check mb-3">
+		<label class="form-check-label">
+		  <input class="form-check-input" type="checkbox" name="remember" id="rememberChec"> 已仔细核对地址！！
+		</label>
+	  </div>
+	  <button  class="btn btn-primary" style="width: 96%;height: 40px;font-size: small;background: #5c56e3;border-radius:18px" id="reset">提交</button>
+
+	
+</div>
+
+<!-- -----------------------------表单-------------end---------------------- -->
+
+
+         <!-- ------------------第一部分完结---------------------------------- -->
+
+		<!-- 第二部分 -->
+<br>
+ <div class="container mt-3" style="height: 200px;width: 100%;background: #ffffff;border-radius:15px;font-size: small;">
+
+<br>
+  <h5 style="vertical-align:middle;"><i class="bi bi-file-earmark-pdf-fill" style="color: #5c56e3;font-size: x-large;vertical-align:middle;padding-right: 4px;"></i>账目信息</h5>
+
+<div style="line-height:40px;">
+基本仓：<label id="home_base_mon">0USDT</label><br>
+利润仓：<label id="home_porfit_mon">0USDT</label><br>
+活动仓：<label id="home_mem_mon">0USDT</label><br>
+</div>
+
+</div><!-- -----------------第二部分完结------------------ -->
+
+<!-- 第三部分 -->
+
+   <div class="container mt-3" style="height: 140px;width: 100%;border-radius:15px;font-size: small;">
+<br>
+
+	<ul style="list-style-type: none;">
+  <li ><i class="bi bi-grid-fill" style="color:#c1c1c1 ;font-size: large;padding-right: 10px;vertical-align:middle;"></i> <a href="project.html" style="text-decoration: none;color: #c1c1c1;font-weight: 500;vertical-align:middle;">doo概要</a></li>
+
+  <li><i class="bi bi-file-person-fill" style="color:#c1c1c1 ;font-size: large;padding-right: 10px;vertical-align:middle;"></i><a href="home.html" style="text-decoration: none;color: #c1c1c1;font-weight: 500;vertical-align:middle;">个人中心</a></li>
+
+  
+
+<li ><i class="bi bi-patch-question-fill" style="color:#dadcdc ;font-size: large;padding-right: 10px;vertical-align:middle;"></i><a href="help.html" style="text-decoration: none;color: #c1c1c1;font-weight: 500;vertical-align:middle;">帮助中心</a></li>
+
+<li style="color:#c1c1c1 ;padding-top: 6px;">___________________________________________</li>
+<li style="color:#c1c1c1 ;font-size:x-small;float: right;padding-right: 20px;padding-top: 6px;">V1.0</li>
+</ul>
+
+
+
+
+   </div><!-- ---------------------第三部分完结------------------------- -->
+</div>
+</div><!-- -------------中间背景----------------------- -->
+  
+</div><!---------背景end--------------->
+	
+</body>
+</html>
