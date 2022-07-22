@@ -51,8 +51,8 @@ App={
             params: [
           {
             chainId: '0x61',
-            chainName: 'BSC',
-            rpcUrls: ['https://bsc-dataseed.binance.org/'] ,
+            chainName: 'BSC-test',
+            rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'] ,
           },
         ]
            });
