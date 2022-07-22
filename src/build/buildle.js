@@ -85923,13 +85923,11 @@ App={
   instance:{},
   fml_instance:{},
   main_number:"$"+"...",
-  // contract_Addr:'0xaD4d8cAbb9D2C6B495Fb5EeFeEf871dE356c0ee7',
-  // contract_usdtd:'0xB8AfDC29EC2A48e253023384F2ee22874875448A',
-  // contract_Addr:'0xE9a155991FeD1b4dCD1d425ac6c1E7Efe6e90F3a',
+
+  //   contract_Addr:'0x024134c408a573289382FD296d2057015a151252',
   // contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
-    contract_Addr:'0x024134c408a573289382FD296d2057015a151252',
-  contract_usdtd:'0x1679Abf65C9c4777C081A15cE79a279952527751',
-  
+  contract_Addr:'0xc7d8e4a76F75def6Bf36bA19FAe71DC99B2A6d0C',
+  contract_usdtd:'0x55d398326f99059fF775485246999027B3197955',
   originalBlock:20964943,
   chainIdd:"0x61",
   infor:{},
@@ -85949,12 +85947,12 @@ App={
        App.chainIdd=chainID;
       $("#chain").text(chainID);
 
-   if (chainID!='0x61'){
+   if (chainID!='0x38'){
      
      try {
           ethereum.request({
      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x61' }],
+      params: [{ chainId: '0x38' }],
 
      });
      window.location.reload();
@@ -85965,9 +85963,9 @@ App={
             method: 'wallet_addEthereumChain',
             params: [
           {
-            chainId: '0x61',
-            chainName: 'BSC-TEST',
-            rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'] ,
+            chainId: '0x38',
+            chainName: 'BSC',
+            rpcUrls: ['https://bsc-dataseed.binance.org/'] ,
           },
         ]
            });
